@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP CELEBRITY – Životopisy, zajímavosti a fotogalerie známých osobností</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            anthracite: '#1e1e1e',
+                            gold: '#D4AF37',
+                            'gold-light': '#f3e5ab',
+                            burgundy: '#58111A',
+                            'burgundy-light': '#7a1824',
+                            cream: '#f9f6f0'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0a0a; color: #f9f6f0; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+        .gold-border { border-color: rgba(212, 175, 55, 0.3); }
+        .gold-border-hover:hover { border-color: #D4AF37; }
+        .gold-gradient-text { background: linear-gradient(135deg, #f3e5ab 0%, #D4AF37 50%, #aa8c2c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-btn { background: linear-gradient(135deg, #D4AF37 0%, #aa8c2c 100%); color: #0a0a0a; font-weight: 600; transition: all 0.3s ease; }
+        .gold-btn:hover { background: linear-gradient(135deg, #f3e5ab 0%, #D4AF37 100%); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .burgundy-card { background: linear-gradient(145deg, #1e1e1e 0%, #121212 100%); border: 1px solid rgba(212, 175, 55, 0.2); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2); }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-gold selection:text-black">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-brand-black/95 backdrop-blur-md border-b gold-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#uvod" onclick="router('uvod')" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-star text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-serif font-bold tracking-wider gold-gradient-text">TOP CELEBRITY</span>
+                    <span class="block text-[10px] tracking-widest text-zinc-400 uppercase font-sans">Magazín osobností</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-zinc-300">
+                <button onclick="router('uvod')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent data-[active=true]:border-brand-gold data-[active=true]:text-brand-gold" data-target="uvod">Úvod</button>
+                <button onclick="router('zeny-zahranici')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-zahranici">Ženy – zahraničí</button>
+                <button onclick="router('zeny-cr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-cr">Ženy – ČR</button>
+                <button onclick="router('zeny-sr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-sr">Ženy – SR</button>
+                <button onclick="router('muzi-zahranici')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="muzi-zahranici">Muži – zahraničí</button>
+                <button onclick="router('muzi-cr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="muzi-cr">Muži – ČR</button>
+                <button onclick="router('fotogalerie')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="fotogalerie">Fotogalerie</button>
+                <button onclick="router('kniha-navstev')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="kniha-navstev">Kniha návštěv</button>
+                <button onclick="router('odkazy')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="odkazy">Odkazy</button>
+            </nav>
+
+            <!-- Search & Mobile Hamburger -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSearchModal()" class="w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition-all" title="Vyhledávání">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition-all">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-brand-dark border-b gold-border px-6 py-4 space-y-3">
+            <button onclick="router('uvod'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Úvod</button>
+            <button onclick="router('zeny-zahranici'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – zahraničí</button>
+            <button onclick="router('zeny-cr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – ČR</button>
+            <button onclick="router('zeny-sr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – SR</button>
+            <button onclick="router('muzi-zahranici'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Muži – zahraničí</button>
+            <button onclick="router('muzi-cr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Muži – ČR</button>
+            <button onclick="router('fotogalerie'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Fotogalerie</button>
+            <button onclick="router('kniha-navstev'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Kniha návštěv</button>
+            <button onclick="router('odkazy'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold">Odkazy</button>
+        </div>
+    </header>
+
+    <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+    <main id="appContent" class="flex-grow">
+        <!-- Content injected dynamically via JavaScript -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark border-t gold-border pt-12 pb-8 mt-20 text-zinc-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold">
+                        <i class="fa-solid fa-star text-sm"></i>
+                    </div>
+                    <span class="text-xl font-serif font-bold tracking-wider gold-gradient-text">TOP CELEBRITY</span>
+                </div>
+                <p class="text-xs text-zinc-400 leading-relaxed">
+                    Luxusní český magazín přinášející exkluzivní životopisy, zajímavosti a bohaté fotogalerie ze světa domácích i zahraničních celebrit.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Kategorie osobností</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="router('zeny-zahranici')" class="hover:text-brand-gold transition-colors">Ženy – zahraničí</button></li>
+                    <li><button onclick="router('zeny-cr')" class="hover:text-brand-gold transition-colors">Ženy – ČR</button></li>
+                    <li><button onclick="router('zeny-sr')" class="hover:text-brand-gold transition-colors">Ženy – SR</button></li>
+                    <li><button onclick="router('muzi-zahranici')" class="hover:text-brand-gold transition-colors">Muži – zahraničí</button></li>
+                    <li><button onclick="router('muzi-cr')" class="hover:text-brand-gold transition-colors">Muži – ČR</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Rychlé odkazy</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="router('fotogalerie')" class="hover:text-brand-gold transition-colors">Velká fotogalerie</button></li>
+                    <li><button onclick="router('kniha-navstev')" class="hover:text-brand-gold transition-colors">Kniha návštěv</button></li>
+                    <li><button onclick="router('odkazy')" class="hover:text-brand-gold transition-colors">Partnerské odkazy</button></li>
+                    <li><button onclick="toggleSearchModal()" class="hover:text-brand-gold transition-colors">Vyhledávání v článcích</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Redakce & Kontakt</h4>
+                <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Máte tip na zajímavou osobnost nebo připomínku k obsahu? Neváhejte nás kontaktovat.</p>
+                <div class="flex items-center gap-3 text-brand-gold">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span class="text-xs">redakce@topcelebrity.cz</span>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
+            <p>&copy; 2026 TOP CELEBRITY. Všechna práva vyhrazena. Původní web modernizován pro maximální zážitek.</p>
+            <!-- HIDDEN PWA ADMIN TRIGGER (Security Shield in Footer) -->
+            <button onclick="openAdminLogin()" class="flex items-center gap-2 text-zinc-600 hover:text-brand-gold transition-colors p-2 rounded" title="Správa webu (Admin PWA)">
+                <i class="fa-solid fa-shield-halved text-sm"></i>
+                <span class="text-[10px] tracking-wider uppercase">PWA Administrace</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-start justify-center pt-20 px-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-2xl rounded-xl p-6 shadow-2xl relative animate-fadeIn">
+            <button onclick="toggleSearchModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold text-lg w-8 h-8 flex items-center justify-center rounded-full bg-brand-anthracite">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-serif font-bold text-brand-gold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass"></i> Vyhledávání osobností
+            </h3>
+            <div class="relative mb-6">
+                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Zadejte jméno osobnosti, klíčové slovo..." class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-3 pl-10 text-cream placeholder-zinc-500 focus:outline-none focus:border-brand-gold">
+                <i class="fa-solid fa-search absolute left-3.5 top-4 text-zinc-500"></i>
+            </div>
+            <div id="searchResults" class="max-h-96 overflow-y-auto space-y-3">
+                <p class="text-zinc-500 text-sm text-center py-8">Začněte psát pro vyhledávání v profilech...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button onclick="prevLightboxImage()" class="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="nextLightboxImage()" class="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="max-w-5xl max-h-[85vh] flex flex-col items-center">
+            <img id="lightboxImg" src="" alt="Detail fotografie" class="max-h-[75vh] max-w-full object-contain rounded-lg border gold-border shadow-2xl">
+            <p id="lightboxCaption" class="mt-4 text-brand-gold font-serif text-lg text-center"></p>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-md rounded-xl p-6 shadow-2xl relative">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-serif font-bold text-brand-gold mb-2">PWA Administrace</h3>
+            <p class="text-xs text-zinc-400 mb-6">Zadejte bezpečnostní PIN pro přístup do redakčního systému (výchozí: 2026).</p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">PIN Kód</label>
+                    <input type="password" id="adminPinInput" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="Zadejte PIN">
+                </div>
+                <button onclick="verifyAdminPin()" class="w-full gold-btn py-2.5 rounded-lg text-sm uppercase tracking-wider">Přihlásit se do administrace</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PWA ADMIN DASHBOARD MODAL -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 bg-brand-black hidden flex flex-col overflow-hidden">
+        <!-- Admin Header -->
+        <div class="bg-brand-dark border-b gold-border px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-brand-burgundy border gold-border flex items-center justify-center text-brand-gold">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-serif font-bold text-brand-gold">TOP CELEBRITY – PWA Administrace</h2>
+                    <p class="text-xs text-zinc-400">Správa profilů, článků, fotografií a odkazů</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="exportDataJSON()" class="bg-brand-anthracite border gold-border px-4 py-2 rounded-lg text-xs font-semibold text-brand-gold hover:bg-brand-gold hover:text-black transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Export dat
+                </button>
+                <button onclick="closeAdminDashboard()" class="bg-brand-burgundy text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-brand-burgundy-light transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Odhlásit / Zavřít
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Content Area -->
+        <div class="flex-grow flex overflow-hidden">
+            <!-- Sidebar Tabs -->
+            <div class="w-64 bg-brand-dark border-r gold-border p-4 space-y-2 hidden md:block">
+                <button onclick="switchAdminTab('profiles')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="profiles">
+                    <i class="fa-solid fa-users w-5"></i> Profily osobností
+                </button>
+                <button onclick="switchAdminTab('articles')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="articles">
+                    <i class="fa-solid fa-newspaper w-5"></i> Články & Zajímavosti
+                </button>
+                <button onclick="switchAdminTab('gallery')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="gallery">
+                    <i class="fa-solid fa-images w-5"></i> Fotogalerie
+                </button>
+                <button onclick="switchAdminTab('guestbook')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="guestbook">
+                    <i class="fa-solid fa-book-open w-5"></i> Kniha návštěv
+                </button>
+            </div>
+
+            <!-- Main Tab Panel Content -->
+            <div class="flex-grow overflow-y-auto p-6 md:p-8 bg-brand-black">
+                <!-- PROFILES TAB -->
+                <div id="adminTabProfiles" class="admin-tab-content space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa profilů osobností</h3>
+                        <button onclick="openProfileModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat nový profil
+                        </button>
+                    </div>
+                    <div id="adminProfilesTable" class="bg-brand-dark border gold-border rounded-xl overflow-hidden">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- ARTICLES TAB -->
+                <div id="adminTabArticles" class="admin-tab-content space-y-6 hidden">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa článků a zajímavostí</h3>
+                        <button onclick="openArticleModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat nový článek
+                        </button>
+                    </div>
+                    <div id="adminArticlesTable" class="bg-brand-dark border gold-border rounded-xl overflow-hidden">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- GALLERY TAB -->
+                <div id="adminTabGallery" class="admin-tab-content space-y-6 hidden">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa fotogalerie</h3>
+                        <button onclick="openGalleryItemModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat fotografii
+                        </button>
+                    </div>
+                    <div id="adminGalleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- GUESTBOOK TAB -->
+                <div id="adminTabGuestbook" class="admin-tab-content space-y-6 hidden">
+                    <h3 class="text-2xl font-serif font-bold text-brand-gold">Moderování knihy návštěv</h3>
+                    <div id="adminGuestbookList" class="space-y-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE EDIT/CREATE MODAL -->
+    <div id="profileModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl p-6 shadow-2xl relative">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="profileModalTitle" class="text-xl font-serif font-bold text-brand-gold mb-6">Přidat / Upravit profil</h3>
+            <form id="profileForm" onsubmit="saveProfile(event)" class="space-y-4">
+                <input type="hidden" id="profileId">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Jméno osobnosti</label>
+                        <input type="text" id="pName" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Kategorie</label>
+                        <select id="pCategory" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold">
+                            <option value="zeny-zahranici">Ženy – zahraničí</option>
+                            <option value="zeny-cr">Ženy – ČR</option>
+                            <option value="zeny-sr">Ženy – SR</option>
+                            <option value="muzi-zahranici">Muži – zahraničí</option>
+                            <option value="muzi-cr">Muži – ČR</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">URL hlavní fotografie</label>
+                    <input type="url" id="pImage" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="https://...">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Povolání / Role</label>
+                        <input type="text" id="pProfession" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. Herečka a modelka">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Datum narození / Věk</label>
+                        <input type="text" id="pBirth" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. 15. června 1990">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Životopis</label>
+                    <textarea id="pBio" rows="5" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">URL adresy fotek do galerie (oddělené čárkou)</label>
+                    <textarea id="pGallery" rows="2" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="url1, url2, url3..."></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeProfileModal()" class="bg-brand-anthracite px-4 py-2 rounded-lg text-sm text-zinc-300 hover:text-white">Zrušit</button>
+                    <button type="submit" class="gold-btn px-6 py-2 rounded-lg text-sm">Uložit profil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION CORE -->
+    <script>
+        /* DEFAULT MOCK & PERSISTENT DATA */
+        const defaultProfiles = [
+            {
+                id: '1',
+                name: 'Scarlett Johansson',
+                category: 'zeny-zahranici',
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herečka a producentka',
+                birth: '22. listopadu 1984',
+                bio: 'Scarlett Johansson je americká herečka a zpěvačka, jedna z nejlépe placených herců na světě. Proslavila se rolemi ve filmech jako Ztraceno v překladu, Manželská historie či jako Black Widow v univerzu Marvel Cinematic Universe.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '2',
+                name: 'Aňa Geislerová',
+                category: 'zeny-cr',
+                image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herečka a spisovatelka',
+                birth: '17. dubna 1976',
+                bio: 'Anna Geislerová je držitelka několika českých lví za nejlepší ženský herecký výkon v hlavní i vedlejší roli. Patří k nejvýraznějším osobnostem českého filmového plátna posledních tří desetiletí.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '3',
+                name: 'Magdaléna Rybáriková',
+                category: 'zeny-sr',
+                image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Bývalá profesionální tenistka',
+                birth: '4. října 1988',
+                bio: 'Magdaléna Rybáriková je úspěšná slovenská tenistka, semifinalistka Wimbledonu ve dvouhře a vítězka několika turnajů WTA, reprezentantka Slovenska v Fed Cupu.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '4',
+                name: 'Ryan Gosling',
+                category: 'muzi-zahranici',
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herec a hudebník',
+                birth: '12. listopadu 1980',
+                bio: 'Ryan Gosling je kanadský herec známý svými rolemi v nezávislých filmech i velkolepých hollywoodských trhácích jako La La Land, Drive či Barbie.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '5',
+                name: 'Jiří Mádl',
+                category: 'muzi-cr',
+                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herec, scenárista a režisér',
+                birth: '23. října 1986',
+                bio: 'Jiří Mádl se proslavil komediálními rolemi v mládí a postupně se vypracoval v uznávaného režiséra a autora oceňovaných snímků.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80'
+                ]
+            }
+        ];
+
+        const defaultArticles = [
+            {
+                id: '1',
+                title: 'Největší módní trendy na červeném koberci roku 2026',
+                perex: 'Přehled nejodvážnějších a nejelegantnějších modelů, které ovládly letošní filmové festivaly.',
+                date: '10. března 2026',
+                image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+                content: 'Červený koberec letos přinesl neuvěřitelnou kombinaci klasického hollywoodského glamouru a moderních udržitelných materiálů. Přední návrháři sáhli po metalických odlescích a sytých barvách.'
+            },
+            {
+                id: '2',
+                title: 'Zápisky ze zákulisí natáčení velkofilmu v Praze',
+                perex: 'Jak slavní zahraniční herci objevují kouzlo historické Prahy a české gastronomie.',
+                date: '28. února 2026',
+                image: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80',
+                content: 'Praha nadále zůstává oblíbenou destinací filmových štábů z celého světa. Podrobnosti o pobytu hvězd v centru města.'
+            }
+        ];
+
+        const defaultGuestbook = [
+            { id: '1', name: 'Pavel Novák', message: 'Skvělý magazín, moc se mi líbí nový luxusní design a přehledné profily!', date: '12.3.2026' },
+            { id: '2', name: 'Jana Kovářová', message: 'Konečně pořádný web o celebritách na úrovni. Díky za skvělé fotogalerie.', date: '10.3.2026' }
+        ];
+
+        // Load or initialize state from localStorage
+        let state = {
+            profiles: JSON.parse(localStorage.getItem('top_celebrity_profiles')) || defaultProfiles,
+            articles: JSON.parse(localStorage.getItem('top_celebrity_articles')) || defaultArticles,
+            guestbook: JSON.parse(localStorage.getItem('top_celebrity_guestbook')) || defaultGuestbook
+        };
+
+        function saveData() {
+            localStorage.setItem('top_celebrity_profiles', JSON.stringify(state.profiles));
+            localStorage.setItem('top_celebrity_articles', JSON.stringify(state.articles));
+            localStorage.setItem('top_celebrity_guestbook', JSON.stringify(state.guestbook));
+        }
+
+        /* ROUTING ENGINE */
+        let currentRoute = 'uvod';
+        let currentParam = null;
+
+        function router(route, param = null) {
+            currentRoute = route;
+            currentParam = param;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update active nav styles
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if(el.getAttribute('data-target') === route) {
+                    el.setAttribute('data-active', 'true');
+                    el.classList.add('text-brand-gold', 'border-brand-gold');
+                } else {
+                    el.removeAttribute('data-active');
+                    el.classList.remove('text-brand-gold', 'border-brand-gold');
+                }
+            });
+
+            const container = document.getElementById('appContent');
+
+            if (route === 'uvod') {
+                container.innerHTML = renderHomeView();
+            } else if (['zeny-zahranici', 'zeny-cr', 'zeny-sr', 'muzi-zahranici', 'muzi-cr'].includes(route)) {
+                container.innerHTML = renderCategoryView(route);
+            } else if (route === 'detail') {
+                container.innerHTML = renderDetailView(param);
+            } else if (route === 'fotogalerie') {
+                container.innerHTML = renderGalleryView();
+            } else if (route === 'kniha-navstev') {
+                container.innerHTML = renderGuestbookView();
+            } else if (route === 'odkazy') {
+                container.innerHTML = renderLinksView();
+            } else if (route === 'clanek') {
+                container.innerHTML = renderArticleView(param);
+            }
+        }
+
+        /* VIEW RENDERERS */
+        function renderHomeView() {
+            const latestProfiles = state.profiles.slice(-4).reverse();
+            return `
+                <!-- HERO BANNER -->
+                <section class="relative bg-brand-dark border-b gold-border overflow-hidden py-16 lg:py-24">
+                    <div class="absolute inset-0 z-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1920&q=80')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent z-10"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-anthracite border gold-border text-brand-gold text-xs tracking-wider uppercase">
+                                <i class="fa-solid fa-crown"></i> Exkluzivní magazín
+                            </div>
+                            <h1 class="text-4xl sm:text-6xl font-serif font-bold text-cream tracking-wide leading-tight">
+                                PŘÍBĚHY <span class="gold-gradient-text">OSOBNOSTÍ</span>
+                            </h1>
+                            <p class="text-zinc-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                                Životopisy, zajímavosti a exkluzivní fotogalerie známých osobností z domova i ze světa v moderním luxusním provedení.
+                            </p>
+                            <div class="flex flex-wrap gap-4 pt-2">
+                                <button onclick="router('zeny-zahranici')" class="gold-btn px-8 py-3 rounded-lg text-sm uppercase tracking-wider">Prozkoumat profily</button>
+                                <button onclick="router('fotogalerie')" class="bg-brand-anthracite border gold-border text-brand-gold px-8 py-3 rounded-lg text-sm uppercase tracking-wider hover:bg-brand-gold hover:text-black transition-all">Fotogalerie</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CATEGORIES GRID -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <h2 class="text-3xl font-serif font-bold text-cream mb-8 border-l-4 border-brand-gold pl-4">Kategorie osobností</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                        ${renderCategoryCard('Ženy – zahraničí', 'zeny-zahranici', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Ženy – ČR', 'zeny-cr', 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Ženy – SR', 'zeny-sr', 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Muži – zahraničí', 'muzi-zahranici', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Muži – ČR', 'muzi-cr', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80')}
+                    </div>
+                </section>
+
+                <!-- LATEST PROFILES -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-3xl font-serif font-bold text-cream border-l-4 border-brand-gold pl-4">Nejnovější profily</h2>
+                        <button onclick="router('zeny-zahranici')" class="text-brand-gold text-sm hover:underline flex items-center gap-2">Zobrazit všechny <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${latestProfiles.map(p => renderProfileCard(p)).join('')}
+                    </div>
+                </section>
+
+                <!-- ARTICLES & NEWS -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <h2 class="text-3xl font-serif font-bold text-cream mb-8 border-l-4 border-brand-gold pl-4">Zajímavosti a články</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        ${state.articles.map(art => `
+                            <div onclick="router('clanek', '${art.id}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all">
+                                <div class="h-64 overflow-hidden relative">
+                                    <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <span class="absolute top-4 left-4 bg-brand-black/80 backdrop-blur-sm text-brand-gold text-xs px-3 py-1 rounded-full border gold-border">${art.date}</span>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <h3 class="text-xl font-serif font-bold text-cream group-hover:text-brand-gold transition-colors">${art.title}</h3>
+                                    <p class="text-sm text-zinc-400 line-clamp-2">${art.perex}</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-gold text-xs font-semibold pt-2">Číst celý článek <i class="fa-solid fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderCategoryCard(title, routeName, imgUrl) {
+            return `
+                <div onclick="router('${routeName}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all p-4 text-center flex flex-col items-center justify-between min-h-[180px]">
+                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 gold-border mb-3 group-hover:scale-105 transition-transform">
+                        <img src="${imgUrl}" alt="${title}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-cream font-serif font-bold text-sm sm:text-base group-hover:text-brand-gold transition-colors">${title}</h3>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-wider mt-1">Zobrazit sekci <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            `;
+        }
+
+        function renderProfileCard(p) {
+            return `
+                <div onclick="router('detail', '${p.id}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all flex flex-col justify-between">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-3 left-3 bg-brand-black/80 backdrop-blur-sm text-brand-gold text-xs px-3 py-1 rounded-full border gold-border flex items-center gap-1.5">
+                            <i class="fa-solid fa-camera"></i> ${p.gallery ? p.gallery.length : 1} fotografií
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] uppercase tracking-widest text-brand-gold font-semibold">${p.profession || 'Osobnost'}</span>
+                        <h3 class="text-xl font-serif font-bold text-cream group-hover:text-brand-gold transition-colors">${p.name}</h3>
+                        <div class="pt-2 flex items-center justify-between text-xs text-brand-gold font-semibold">
+                            <span>Profil osobnosti</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCategoryView(categoryCode) {
+            const categoryTitles = {
+                'zeny-zahranici': 'Ženy – zahraničí',
+                'zeny-cr': 'Ženy – ČR',
+                'zeny-sr': 'Ženy – SR',
+                'muzi-zahranici': 'Muži – zahraničí',
+                'muzi-cr': 'Muži – ČR'
+            };
+            const profiles = state.profiles.filter(p => p.category === categoryCode);
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Kategorie</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">${categoryTitles[categoryCode]}</h1>
+                    </div>
+                    ${profiles.length === 0 ? `
+                        <div class="text-center py-20 bg-brand-dark rounded-xl border gold-border">
+                            <i class="fa-solid fa-face-smile text-4xl text-brand-gold mb-4"></i>
+                            <p class="text-zinc-400">V této kategorii zatím nejsou žádné profily. Přidejte je v administraci.</p>
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${profiles.map(p => renderProfileCard(p)).join('')}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function renderDetailView(id) {
+            const p = state.profiles.find(item => item.id === id);
+            if (!p) return `<div class="max-w-7xl mx-auto px-4 py-20 text-center"><h2 class="text-2xl text-red-400">Profil nenalezen</h2><button onclick="router('uvod')" class="mt-4 gold-btn px-6 py-2 rounded-lg">Zpět na úvod</button></div>`;
+            
+            const gallery = p.gallery && p.gallery.length > 0 ? p.gallery : [p.image];
+
+            return `
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                    <!-- Back Button -->
+                    <button onclick="window.history.back()" class="inline-flex items-center gap-2 text-xs text-brand-gold uppercase tracking-wider hover:underline">
+                        <i class="fa-solid fa-arrow-left"></i> Zpět na přehled
+                    </button>
+
+                    <!-- Profile Header -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                        <div class="rounded-xl overflow-hidden border-2 gold-border shadow-2xl">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="md:col-span-2 space-y-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">${p.profession || 'Osobnost'}</span>
+                                <h1 class="text-4xl sm:text-5xl font-serif font-bold text-cream mt-1">${p.name}</h1>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 bg-brand-dark p-4 rounded-xl border gold-border text-sm">
+                                <div>
+                                    <span class="block text-xs text-zinc-500 uppercase">Narození / Věk</span>
+                                    <span class="font-semibold text-cream">${p.birth || 'Neuvedeno'}</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-zinc-500 uppercase">Profese</span>
+                                    <span class="font-semibold text-cream">${p.profession || 'Osobnost'}</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-xl font-serif font-bold text-brand-gold">Životopis</h3>
+                                <p class="text-zinc-300 leading-relaxed text-base font-light">${p.bio}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Gallery Section -->
+                    <div class="space-y-6 pt-8 border-t border-zinc-800">
+                        <h3 class="text-2xl font-serif font-bold text-cream flex items-center gap-2">
+                            <i class="fa-solid fa-images text-brand-gold"></i> Fotogalerie osobnosti
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            ${gallery.map((img, idx) => `
+                                <div onclick="openLightbox('${img}', '${p.name} - foto ${idx+1}')" class="h-48 rounded-xl overflow-hidden border gold-border group cursor-pointer relative">
+                                    <img src="${img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-brand-gold text-xl">
+                                        <i class="fa-solid fa-expand"></i>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGalleryView() {
+            // Collect all photos from profiles
+            let allPhotos = [];
+            state.profiles.forEach(p => {
+                if (p.gallery) {
+                    p.gallery.forEach(img => allPhotos.push({ url: img, name: p.name }));
+                } else if (p.image) {
+                    allPhotos.push({ url: p.image, name: p.name });
+                }
+            });
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Fotogalerie</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Kompletní galerie snímků</h1>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        ${allPhotos.map((photo, idx) => `
+                            <div onclick="openLightbox('${photo.url}', '${photo.name}')" class="h-64 rounded-xl overflow-hidden border gold-border group cursor-pointer relative shadow-lg">
+                                <img src="${photo.url}" alt="${photo.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent opacity-80"></div>
+                                <div class="absolute bottom-3 left-3 right-3">
+                                    <span class="text-xs font-serif font-bold text-brand-gold block truncate">${photo.name}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGuestbookView() {
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Návštěvní kniha</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Vzkazy od čtenářů</h1>
+                    </div>
+                    
+                    <!-- Add Message Form -->
+                    <div class="burgundy-card rounded-xl p-6 sm:p-8 space-y-6">
+                        <h3 class="text-xl font-serif font-bold text-brand-gold">Zanechte nám vzkaz</h3>
+                        <form onsubmit="submitGuestbook(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Vaše jméno</label>
+                                <input type="text" id="gbName" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. Jan Novák">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Váš vzkaz</label>
+                                <textarea id="gbMessage" rows="4" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="Napište svůj názor..."></textarea>
+                            </div>
+                            <button type="submit" class="gold-btn px-8 py-3 rounded-lg text-sm uppercase tracking-wider">Odeslat vzkaz</button>
+                        </form>
+                    </div>
+
+                    <!-- Messages List -->
+                    <div class="space-y-4">
+                        ${state.guestbook.map(gb => `
+                            <div class="bg-brand-dark border gold-border rounded-xl p-6 space-y-2">
+                                <div class="flex items-center justify-between text-xs text-brand-gold">
+                                    <span class="font-bold text-base font-serif text-cream">${gb.name}</span>
+                                    <span>${gb.date}</span>
+                                </div>
+                                <p class="text-zinc-300 text-sm leading-relaxed">${gb.message}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLinksView() {
+            const links = [
+                { title: 'Oficiální portál Českého filmu', url: 'https://www.csfd.cz', desc: 'Největší filmová databáze a recenze.' },
+                { title: 'Světové celebrity magazín', url: 'https://www.vogue.com', desc: 'Módní a společenský magazín světového formátu.' },
+                { title: 'Kultura a umění ČR', url: 'https://www.mkcr.cz', desc: 'Ministerstvo kultury České republiky.' }
+            ];
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Odkazy</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Doporučené partnerské weby</h1>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${links.map(l => `
+                            <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="burgundy-card rounded-xl p-6 group hover:border-brand-gold transition-all block space-y-2">
+                                <h3 class="text-lg font-serif font-bold text-cream group-hover:text-brand-gold transition-colors flex items-center justify-between">
+                                    ${l.title} <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </h3>
+                                <p class="text-xs text-zinc-400">${l.desc}</p>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderArticleView(id) {
+            const art = state.articles.find(a => a.id === id);
+            if (!art) return `<div class="max-w-7xl mx-auto px-4 py-20 text-center"><h2 class="text-2xl text-red-400">Článek nenalezen</h2><button onclick="router('uvod')" class="mt-4 gold-btn px-6 py-2 rounded-lg">Zpět na úvod</button></div>`;
+
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <button onclick="router('uvod')" class="inline-flex items-center gap-2 text-xs text-brand-gold uppercase tracking-wider hover:underline">
+                        <i class="fa-solid fa-arrow-left"></i> Zpět na úvod
+                    </button>
+                    <div class="space-y-4">
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">${art.date}</span>
+                        <h1 class="text-4xl sm:text-5xl font-serif font-bold text-cream leading-tight">${art.title}</h1>
+                    </div>
+                    <div class="rounded-xl overflow-hidden border gold-grade max-h-[500px]">
+                        <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-zinc-300 leading-relaxed text-lg font-light space-y-6">
+                        <p class="font-semibold text-brand-gold text-xl">${art.perex}</p>
+                        <p>${art.content}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* LIGHTBOX FUNCTIONS */
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
+
+        function openLightbox(imgUrl, caption) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCaption');
+            img.src = imgUrl;
+            cap.innerText = caption;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        function prevLightboxImage() {}
+        function nextLightboxImage() {}
+
+        /* SEARCH MODAL */
+        function toggleSearchModal() {
+            const m = document.getElementById('searchModal');
+            m.classList.toggle('hidden');
+            if(!m.classList.contains('hidden')) {
+                document.getElementById('searchInput').focus();
+            }
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if(!query || query.trim() === '') {
+                resultsContainer.innerHTML = '<p class="text-zinc-500 text-sm text-center py-8">Začněte psát pro vyhledávání v profilech...</p>';
+                return;
+            }
+            const q = query.toLowerCase();
+            const matched = state.profiles.filter(p => p.name.toLowerCase().includes(q) || (p.profession && p.profession.toLowerCase().includes(q)));
+
+            if(matched.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-zinc-400 text-sm text-center py-8">Žádné osobnosti neodpovídají zadanému výrazu.</p>';
+                return;
+            }
+
+            resultsContainer.innerHTML = matched.map(p => `
+                <div onclick="toggleSearchModal(); router('detail', '${p.id}')" class="flex items-center gap-4 p-3 rounded-lg bg-brand-anthracite hover:bg-brand-burgundy transition-colors cursor-pointer border gold-border">
+                    <img src="${p.image}" class="w-12 h-12 rounded-full object-cover">
+                    <div>
+                        <h4 class="text-cream font-serif font-bold text-base">${p.name}</h4>
+                        <span class="text-xs text-brand-gold">${p.profession || 'Osobnost'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* MOBILE MENU */
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        /* GUESTBOOK SUBMISSION */
+        function submitGuestbook(e) {
+            e.preventDefault();
+            const name = document.getElementById('gbName').value;
+            const message = document.getElementById('gbMessage').value;
+            const newEntry = {
+                id: Date.now().toString(),
+                name: name,
+                message: message,
+                date: new Date().toLocaleDateString('cs-CZ')
+            };
+            state.guestbook.unshift(newEntry);
+            saveData();
+            router('kniha-navstev');
+            alert('Vzkaz byl úspěšně přidán do knihy návštěv.');
+        }
+
+        /* ADMIN PWA SYSTEM & AUTH */
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+        function verifyAdminPin() {
+            const pin = document.getElementById('adminPinInput').value;
+            if(pin === '2026') {
+                closeAdminLogin();
+                document.getElementById('adminDashboardModal').classList.remove('hidden');
+                renderAdminProfiles();
+                renderAdminArticles();
+                renderAdminGallery();
+                renderAdminGuestbook();
+            } else {
+                alert('Nesprávný PIN kód!');
+            }
+        }
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab').forEach(el => el.removeAttribute('data-active'));
+            
+            document.getElementById('adminTab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.remove('hidden');
+            document.querySelector(`[data-tab="${tabName}"]`).setAttribute('data-active', 'true');
+        }
+
+        /* ADMIN PROFILES MANAGEMENT */
+        function renderAdminProfiles() {
+            const table = document.getElementById('adminProfilesTable');
+            table.innerHTML = `
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b gold-border text-brand-gold text-xs uppercase bg-brand-anthracite">
+                            <th class="p-4">Fotografie</th>
+                            <th class="p-4">Jméno</th>
+                            <th class="p-4">Kategorie</th>
+                            <th class="p-4">Profese</th>
+                            <th class="p-4 text-right">Akce</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800">
+                        ${state.profiles.map(p => `
+                            <tr class="hover:bg-brand-anthracite/50">
+                                <td class="p-4"><img src="${p.image}" class="w-10 h-10 rounded-full object-cover"></td>
+                                <td class="p-4 font-semibold text-cream">${p.name}</td>
+                                <td class="p-4 text-xs text-brand-gold">${p.category}</td>
+                                <td class="p-4 text-xs text-zinc-400">${p.profession || '-'}</td>
+                                <td class="p-4 text-right space-x-2">
+                                    <button onclick="editProfile('${p.id}')" class="text-brand-gold hover:underline"><i class="fa-solid fa-pen"></i></button>
+                                    <button onclick="deleteProfile('${p.id}')" class="text-red-400 hover:underline"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function openProfileModal(id = null) {
+            document.getElementById('profileModal').classList.remove('hidden');
+            if(id) {
+                const p = state.profiles.find(item => item.id === id);
+                document.getElementById('profileModalTitle').innerText = 'Upravit profil osobnosti';
+                document.getElementById('profileId').value = p.id;
+                document.getElementById('pName').value = p.name;
+                document.getElementById('pCategory').value = p.category;
+                document.getElementById('pImage').value = p.image;
+                document.getElementById('pProfession').value = p.profession || '';
+                document.getElementById('pBirth').value = p.birth || '';
+                document.getElementById('pBio').value = p.bio;
+                document.getElementById('pGallery').value = p.gallery ? p.gallery.join(', ') : '';
+            } else {
+                document.getElementById('profileModalTitle').innerText = 'Přidat nový profil';
+                document.getElementById('profileForm').reset();
+                document.getElementById('profileId').value = '';
+            }
+        }
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.add('hidden');
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            const id = document.getElementById('profileId').value;
+            const galleryInput = document.getElementById('pGallery').value;
+            const galleryArr = galleryInput ? galleryInput.split(',').map(s => s.trim()).filter(s => s) : [];
+
+            const profileData = {
+                id: id || Date.now().toString(),
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCategory').value,
+                image: document.getElementById('pImage').value,
+                profession: document.getElementById('pProfession').value,
+                birth: document.getElementById('pBirth').value,
+                bio: document.getElementById('pBio').value,
+                gallery: galleryArr.length > 0 ? galleryArr : [document.getElementById('pImage').value]
+            };
+
+            if(id) {
+                const idx = state.profiles.findIndex(p => p.id === id);
+                state.profiles[idx] = profileData;
+            } else {
+                state.profiles.push(profileData);
+            }
+
+            saveData();
+            closeProfileModal();
+            renderAdminProfiles();
+            router('uvod');
+        }
+
+        function deleteProfile(id) {
+            if(confirm('Opravdu chcete tento profil smazat?')) {
+                state.profiles = state.profiles.filter(p => p.id !== id);
+                saveData();
+                renderAdminProfiles();
+            }
+        }
+
+        function editProfile(id) {
+            openProfileModal(id);
+        }
+
+        /* ADMIN ARTICLES & GALLERY */
+        function renderAdminArticles() {
+            document.getElementById('adminArticlesTable').innerHTML = `
+                <div class="p-6 space-y-4">
+                    ${state.articles.map(art => `
+                        <div class="flex items-center justify-between p-4 bg-brand-anthracite rounded-lg border gold-border">
+                            <div>
+                                <h4 class="font-serif font-bold text-cream">${art.title}</h4>
+                                <span class="text-xs text-brand-gold">${art.date}</span>
+                            </div>
+                            <button onclick="deleteArticle('${art.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        function openArticleModal() {
+            const title = prompt('Zadejte název nového článku:');
+            if(!title) return;
+            const perex = prompt('Zadejte perex článku:');
+            const image = prompt('URL hlavní fotografie článku:');
+            const content = prompt('Celý text článku:');
+            
+            const newArt = {
+                id: Date.now().toString(),
+                title: title,
+                perex: perex || '',
+                date: new Date().toLocaleDateString('cs-CZ'),
+                image: image || 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+                content: content || ''
+            };
+            state.articles.push(newArt);
+            saveData();
+            renderAdminArticles();
+        }
+        function deleteArticle(id) {
+            state.articles = state.articles.filter(a => a.id !== id);
+            saveData();
+            renderAdminArticles();
+        }
+
+        function renderAdminGallery() {
+            let allPhotos = [];
+            state.profiles.forEach(p => {
+                if(p.gallery) p.gallery.forEach(img => allPhotos.push({ name: p.name, url: img }));
+            });
+            document.getElementById('adminGalleryGrid').innerHTML = allPhotos.map(ph => `
+                <div class="h-32 rounded-lg overflow-hidden border gold-border relative">
+                    <img src="${ph.url}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-black/70 p-1 text-[10px] text-brand-gold text-center truncate">${ph.name}</div>
+                </div>
+            `).join('');
+        }
+        function openGalleryItemModal() {
+            alert('Fotografie do galerie se spravují přímo v jednotlivých profilech osobností.');
+        }
+
+        function renderAdminGuestbook() {
+            document.getElementById('adminGuestbookList').innerHTML = state.guestbook.map(gb => `
+                <div class="p-4 bg-brand-anthracite rounded-lg border gold-border flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-cream">${gb.name} <span class="text-xs text-zinc-500 font-normal">(${gb.date})</span></h4>
+                        <p class="text-xs text-zinc-300 mt-1">${gb.message}</p>
+                    </div>
+                    <button onclick="deleteGuestbook('${gb.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+        function deleteGuestbook(id) {
+            state.guestbook = state.guestbook.filter(g => g.id !== id);
+            saveData();
+            renderAdminGuestbook();
+        }
+
+        function exportDataJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "top_celebrity_backup.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        /* INITIALIZATION ON PAGE LOAD */
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if URL has #admin hash
+            if(window.location.hash === '#admin') {
+                openAdminLogin();
+            }
+            router('uvod');
+        });
+    </script>
+</body>
+</html>
