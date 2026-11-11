@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC pro seniory – Naučím vás s počítačem, smartphonem a Internetem</title>
-    <!-- Tailwind CSS přes CDN -->
+    <title>TOP CELEBRITY – Životopisy, zajímavosti a fotogalerie známých osobností</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,515 +12,1114 @@
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#051329',
-                            blue: '#0F2C59',
-                            cyan: '#00D2FC',
-                            light: '#F8FAFC',
-                            accent: '#FF007F'
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            anthracite: '#1e1e1e',
+                            gold: '#D4AF37',
+                            'gold-light': '#f3e5ab',
+                            burgundy: '#58111A',
+                            'burgundy-light': '#7a1824',
+                            cream: '#f9f6f0'
                         }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .font-large { font-size: 1.15rem !important; }
-        .high-contrast { background-color: #000 !important; color: #ff0 !important; }
-        .high-contrast a { color: #0ff !important; }
-        .dark-mode { background-color: #121212 !important; color: #e0e0e0 !important; }
-        .dark-mode .bg-white { background-color: #1e1e1e !important; color: #e0e0e0 !important; border-color: #333 !important; }
-        .dark-mode .text-slate-900, .dark-mode .text-slate-800, .dark-mode .text-slate-700 { color: #f1f5f9 !important; }
+        body { background-color: #0a0a0a; color: #f9f6f0; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+        .gold-border { border-color: rgba(212, 175, 55, 0.3); }
+        .gold-border-hover:hover { border-color: #D4AF37; }
+        .gold-gradient-text { background: linear-gradient(135deg, #f3e5ab 0%, #D4AF37 50%, #aa8c2c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-btn { background: linear-gradient(135deg, #D4AF37 0%, #aa8c2c 100%); color: #0a0a0a; font-weight: 600; transition: all 0.3s ease; }
+        .gold-btn:hover { background: linear-gradient(135deg, #f3e5ab 0%, #D4AF37 100%); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .burgundy-card { background: linear-gradient(145deg, #1e1e1e 0%, #121212 100%); border: 1px solid rgba(212, 175, 55, 0.2); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2); }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased pb-20 md:pb-0">
+<body class="min-h-screen flex flex-col selection:bg-brand-gold selection:text-black">
 
-    <!-- PŘÍSTUPNOST / HORNÍ LIŠTA -->
-    <div class="bg-brand-dark text-white text-xs sm:text-sm py-2 px-4 border-b border-blue-950">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-            <div class="flex items-center gap-2">
-                <span>🛠️ Zobrazení:</span>
-                <button onclick="changeFontSize(1)" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded font-bold text-xs border border-slate-700" title="Zvětšit písmo">A+</button>
-                <button onclick="changeFontSize(-1)" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded font-bold text-xs border border-slate-700" title="Zmenšit písmo">A-</button>
-                <button onclick="toggleContrast()" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-xs border border-slate-700">Kontrast</button>
-                <button onclick="toggleDarkMode()" class="bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-xs border border-slate-700" title="Noční režim">🌙</button>
-            </div>
-            <div>
-                <a href="admin.html" class="text-cyan-300 hover:underline text-xs flex items-center gap-1 font-semibold">📱 PWA Administrace</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- HLAVIČKA A NAVIGACE -->
-    <header class="bg-brand-blue text-white shadow-xl sticky top-0 z-50 border-b border-cyan-500/20">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-cyan-600 to-blue-500 p-2.5 rounded-2xl text-white shadow-lg border border-cyan-400/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-brand-black/95 backdrop-blur-md border-b gold-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#uvod" onclick="router('uvod')" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-star text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-black tracking-tight leading-none text-white">PC pro <span class="text-cyan-400">seniory</span></h1>
-                    <p class="text-xs text-cyan-200 mt-1 font-medium">Naučím vás s počítačem</p>
+                    <span class="text-2xl font-serif font-bold tracking-wider gold-gradient-text">TOP CELEBRITY</span>
+                    <span class="block text-[10px] tracking-widest text-zinc-400 uppercase font-sans">Magazín osobností</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Desktop Menu s rozbalovacími lištami -->
-            <nav class="hidden md:flex items-center gap-5 font-semibold text-sm">
-                <a href="#uvod" class="hover:text-cyan-300 transition flex items-center gap-1 py-2">🏠 Úvod</a>
-                
-                <!-- Rozbalovací menu Kurz -->
-                <div class="relative group">
-                    <button class="hover:text-cyan-300 transition flex items-center gap-1 py-2 focus:outline-none">
-                        Kurz ▾
-                    </button>
-                    <div class="absolute left-0 mt-0 w-64 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl hidden group-hover:block p-2 space-y-1 z-50">
-                        <a href="#kurz" onclick="openLesson('kapitola-0')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">0. Popis PC a jeho součástí</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-1')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">1. Základní obsluha</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-2')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">2. Seznámení s OS Windows</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-3')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">3. Složky a soubory</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-4')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">4. Ukládání dat</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-5')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">5. Psaní textu na PC</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-6')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">6. Tisk</a>
-                        <a href="#kurz" onclick="openLesson('kapitola-7')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">7. Internet a e-mail</a>
-                    </div>
-                </div>
-
-                <!-- Rozbalovací menu Smartphone -->
-                <div class="relative group">
-                    <button class="hover:text-cyan-300 transition flex items-center gap-1 py-2 focus:outline-none">
-                        Smartphone ▾
-                    </button>
-                    <div class="absolute left-0 mt-0 w-60 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl hidden group-hover:block p-2 space-y-1 z-50">
-                        <a href="#mobil" onclick="openLesson('mobil-zaklady')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">📱 Ovládání a dotykový displej</a>
-                        <a href="#mobil" onclick="openLesson('mobil-whatsapp')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">💬 WhatsApp a videohovory</a>
-                        <a href="#mobil" onclick="openLesson('mobil-pismo')" class="block px-3 py-2 text-xs hover:bg-blue-900 rounded-xl text-slate-200">🔍 Zvětšení písma v telefonu</a>
-                    </div>
-                </div>
-
-                <a href="#slovnicek" class="hover:text-cyan-300 transition py-2">Slovníček</a>
-                <a href="#bezpecnost" class="text-amber-300 hover:text-amber-200 transition py-2">Bezpečnost</a>
-                <a href="#kontakt" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-4 py-2 rounded-xl shadow-lg transition font-bold">Kontakt</a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-zinc-300">
+                <button onclick="router('uvod')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent data-[active=true]:border-brand-gold data-[active=true]:text-brand-gold" data-target="uvod">Úvod</button>
+                <button onclick="router('zeny-zahranici')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-zahranici">Ženy – zahraničí</button>
+                <button onclick="router('zeny-cr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-cr">Ženy – ČR</button>
+                <button onclick="router('zeny-sr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="zeny-sr">Ženy – SR</button>
+                <button onclick="router('muzi-zahranici')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="muzi-zahranici">Muži – zahraničí</button>
+                <button onclick="router('muzi-cr')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="muzi-cr">Muži – ČR</button>
+                <button onclick="router('fotogalerie')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="fotogalerie">Fotogalerie</button>
+                <button onclick="router('kniha-navstev')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="kniha-navstev">Kniha návštěv</button>
+                <button onclick="router('odkazy')" class="nav-link hover:text-brand-gold transition-colors pb-1 border-b-2 border-transparent" data-target="odkazy">Odkazy</button>
             </nav>
 
-            <!-- Mobilní hamburger tlačítko -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none p-2 bg-blue-900/50 rounded-xl border border-blue-700">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+            <!-- Search & Mobile Hamburger -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSearchModal()" class="w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition-all" title="Vyhledávání">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-black transition-all">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobilní rozbalovací menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-blue-950 border-t border-blue-900 px-4 pt-3 pb-5 space-y-2 text-sm">
-            <a href="#uvod" class="block py-2 px-3 rounded-xl hover:bg-blue-900">🏠 Úvod</a>
-            <div class="border-t border-blue-900 pt-2 pb-1 text-cyan-300 font-bold text-xs uppercase px-3">Počítačový kurz</div>
-            <a href="#kurz" onclick="openLesson('kapitola-0')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">0. Popis PC a jeho součástí</a>
-            <a href="#kurz" onclick="openLesson('kapitola-1')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">1. Základní obsluha</a>
-            <a href="#kurz" onclick="openLesson('kapitola-2')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">2. Seznámení s OS Windows</a>
-            <a href="#kurz" onclick="openLesson('kapitola-3')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">3. Složky a soubory</a>
-            <a href="#kurz" onclick="openLesson('kapitola-7')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">7. Internet a e-mail</a>
-            <div class="border-t border-blue-900 pt-2 pb-1 text-cyan-300 font-bold text-xs uppercase px-3">Smartphone a tablet</div>
-            <a href="#mobil" onclick="openLesson('mobil-zaklady')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">📱 Ovládání a dotykový displej</a>
-            <a href="#mobil" onclick="openLesson('mobil-whatsapp')" class="block py-2 px-4 text-xs hover:bg-blue-900 rounded-xl">💬 WhatsApp a videohovory</a>
-            <div class="border-t border-blue-900 pt-2"></div>
-            <a href="#slovnicek" class="block py-2 px-3 rounded-xl hover:bg-blue-900">📖 Slovníček pojmů</a>
-            <a href="#bezpecnost" class="block py-2 px-3 rounded-xl hover:bg-blue-900 text-amber-300 font-bold">⚠️ Bezpečnost</a>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-brand-dark border-b gold-border px-6 py-4 space-y-3">
+            <button onclick="router('uvod'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Úvod</button>
+            <button onclick="router('zeny-zahranici'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – zahraničí</button>
+            <button onclick="router('zeny-cr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – ČR</button>
+            <button onclick="router('zeny-sr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Ženy – SR</button>
+            <button onclick="router('muzi-zahranici'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Muži – zahraničí</button>
+            <button onclick="router('muzi-cr'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Muži – ČR</button>
+            <button onclick="router('fotogalerie'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Fotogalerie</button>
+            <button onclick="router('kniha-navstev'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold border-b border-zinc-800">Kniha návštěv</button>
+            <button onclick="router('odkazy'); toggleMobileMenu();" class="block w-full text-left py-2 text-zinc-300 hover:text-brand-gold">Odkazy</button>
         </div>
     </header>
 
-    <!-- HLAVNÍ BANNER PŘesně podle tvého zadání a vzorů (1000142015.png / 1000142016.png) -->
-    <section id="uvod" class="relative bg-gradient-to-r from-brand-dark via-brand-blue to-cyan-950 text-white py-12 md:py-20 overflow-hidden shadow-2xl border-b border-cyan-500/30">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
-            
-            <!-- Textová část banneru s moderním vzhledem -->
-            <div class="space-y-6 z-10">
-                <span class="bg-cyan-500/20 text-cyan-300 text-xs md:text-sm font-bold px-4 py-2 rounded-full border border-cyan-400/40 inline-flex items-center gap-2 shadow-inner">
-                    ✨ Moderní výukový portál pro seniory
-                </span>
-                
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight drop-shadow-md">
-                    Počítačový kurz <span class="text-cyan-400 drop-shadow">pro seniory</span>
-                </h2>
-                
-                <p class="text-base sm:text-lg md:text-xl text-slate-100 leading-relaxed font-normal">
-                    Naučte se pracovat s počítačem, smartphonem a Internetem jednoduše, bez strachu a vlastním tempem. Vše vysvětlujeme po lopatě!
-                </p>
-
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#kurz" class="bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-xl transition transform hover:scale-105 flex items-center gap-3 text-base md:text-lg border border-cyan-300">
-                        <span>▶ Začít kurz</span>
-                    </a>
-                    <a href="#slovnicek" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-4 rounded-2xl border border-white/25 transition backdrop-blur-sm">
-                        📖 Slovníček pojmů
-                    </a>
-                </div>
-            </div>
-
-            <!-- Vizuální karta banneru s motivem seniorů a novinkou pro smartphone -->
-            <div class="relative flex justify-center">
-                <div class="relative bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-700 p-2.5 rounded-3xl shadow-2xl max-w-lg w-full border border-cyan-400/40">
-                    <div class="bg-slate-900/90 backdrop-blur rounded-2xl p-6 text-center space-y-4 relative overflow-hidden">
-                        
-                        <!-- Růžová pečeť NOVĚ Smartphone a tablet -->
-                        <div class="absolute -top-4 -right-4 bg-gradient-to-tr from-pink-600 to-rose-500 text-white w-24 h-24 rounded-full flex flex-col items-center justify-center p-2 shadow-2xl border-2 border-white/40 transform rotate-12 z-20">
-                            <span class="text-[10px] font-black uppercase tracking-wider">NOVĚ</span>
-                            <span class="text-[10px] font-bold text-center leading-tight">Smartphone & tablet</span>
-                        </div>
-
-                        <div class="text-6xl pt-2">👵 💻 👴</div>
-                        <h3 class="text-xl font-bold text-white">Pracujeme bez obav</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            Žádné složité poučky. Každý krok je ukázaný přesně tak, jak jej vidíte na svém skutečném zařízení.
-                        </p>
-                        <div class="bg-blue-950/80 p-3.5 rounded-xl border border-blue-800 text-left text-xs space-y-1.5 text-cyan-200">
-                            <p><strong>💡 Naše pravidlo:</strong> Pokud něčemu nerozumíte, stačí kliknout na tlačítko <em>„Vysvětli mi to ještě jednodušeji“</em>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- HLAVNÍ OBSAH / KURZY -->
-    <main class="max-w-7xl mx-auto px-4 py-12 space-y-16">
-        
-        <!-- Sekce kapitol počítačového kurzu -->
-        <section id="kurz" class="space-y-8">
-            <div class="text-center max-w-2xl mx-auto space-y-3">
-                <h2 class="text-3xl font-black text-slate-900">Počítačový kurz krok za krokem</h2>
-                <p class="text-slate-600">Vyberte si kapitolu, se kterou chcete začít. Všechny lekce jsou psané srozumitelně pro začátečníky.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Karta 0 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-bold text-xl mb-4 shadow-sm">0</div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Popis PC a jeho součástí</h3>
-                        <p class="text-sm text-slate-600">Skříň počítače, klávesnice, myš a jak to celé dohromady funguje.</p>
-                    </div>
-                    <button onclick="openLesson('kapitola-0')" class="mt-6 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 rounded-xl transition">
-                        Otevřít lekci →
-                    </button>
-                </div>
-
-                <!-- Karta 1 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-bold text-xl mb-4 shadow-sm">1</div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Základní obsluha</h3>
-                        <p class="text-sm text-slate-600">Správné sezení, osvětlení, práce s myší a bezpečné spuštění počítače.</p>
-                    </div>
-                    <button onclick="openLesson('kapitola-1')" class="mt-6 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 rounded-xl transition">
-                        Otevřít lekci →
-                    </button>
-                </div>
-
-                <!-- Karta 2 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-bold text-xl mb-4 shadow-sm">2</div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Seznámení s OS Windows</h3>
-                        <p class="text-sm text-slate-600">Prostředí Windows, práce s okny, přetahování myší a program Malování.</p>
-                    </div>
-                    <button onclick="openLesson('kapitola-2')" class="mt-6 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 rounded-xl transition">
-                        Otevřít lekci →
-                    </button>
-                </div>
-
-                <!-- Karta 3 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-bold text-xl mb-4 shadow-sm">3</div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Složky a soubory</h3>
-                        <p class="text-sm text-slate-600">Jak si udržet pořádek v dokumentech, vytváření a přejmenování složek.</p>
-                    </div>
-                    <button onclick="openLesson('kapitola-3')" class="mt-6 w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2.5 rounded-xl transition">
-                        Otevřít lekci →
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEKCE SMARTPHONE A TABLET -->
-        <section id="mobil" class="bg-gradient-to-r from-cyan-950 to-blue-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden border border-cyan-500/30">
-            <div class="max-w-3xl space-y-6 relative z-10">
-                <span class="bg-cyan-500 text-slate-950 text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider">Nová rozšířená sekce</span>
-                <h2 class="text-3xl font-black">Smartphone a tablet (Android & iPhone)</h2>
-                <p class="text-cyan-100 leading-relaxed text-base sm:text-lg">
-                    Máte chytrý telefon a nevíte, jak na dotykový displej, WhatsApp, focení nebo volání vnoučatům? Máme pro vás podrobné návody zvlášť pro telefony Samsung/Xiaomi (Android) a zvlášť pro Apple iPhone.
-                </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <button onclick="openLesson('mobil-zaklady')" class="bg-white text-cyan-950 font-bold px-6 py-3.5 rounded-2xl hover:bg-cyan-50 transition shadow-lg">
-                        📱 Ovládání a dotykový displej
-                    </button>
-                    <button onclick="openLesson('mobil-whatsapp')" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-extrabold px-6 py-3.5 rounded-2xl transition shadow-lg">
-                        💬 WhatsApp a videohovory
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- BEZPEČNOST NA INTERNETU -->
-        <section id="bezpecnost" class="bg-amber-50/80 border-2 border-amber-300 rounded-3xl p-8 shadow-md space-y-6">
-            <div class="flex items-center gap-4">
-                <div class="bg-amber-500 text-white p-3.5 rounded-2xl text-2xl shadow">⚠️</div>
-                <div>
-                    <h2 class="text-2xl font-black text-slate-900">Bezpečnost na Internetu bez obav</h2>
-                    <p class="text-slate-700 text-sm">Jak bezpečně nakupovat, rozpoznat falešné SMS od „bankéřů“ a chránit svá data.</p>
-                </div>
-            </div>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2 shadow-sm">
-                    <h3 class="font-bold text-slate-900">🚨 Pozor na falešné SMS</h3>
-                    <p class="text-xs text-slate-600">Jak odhalit podvodné zprávy o balíčcích či blokovaném účtu.</p>
-                    <button onclick="openLesson('bezpecnost-sms')" class="text-xs text-amber-700 font-bold hover:underline pt-2 block">Přečíst návod →</button>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2 shadow-sm">
-                    <h3 class="font-bold text-slate-900">🔒 Bezpečná hesla</h3>
-                    <p class="text-xs text-slate-600">Proč si hesla nemíchat a jak si zapamatovat to hlavní.</p>
-                    <button onclick="openLesson('bezpecnost-hesla')" class="text-xs text-amber-700 font-bold hover:underline pt-2 block">Přečíst návod →</button>
-                </div>
-                <div class="bg-white p-5 rounded-2xl border border-amber-200 space-y-2 shadow-sm">
-                    <h3 class="font-bold text-slate-900">🛒 Nákupy online</h3>
-                    <p class="text-xs text-slate-600">Jak bezpečně objednat zboží a nenaletět podvodným e-shopům.</p>
-                    <button onclick="openLesson('bezpecnost-nakupy')" class="text-xs text-amber-700 font-bold hover:underline pt-2 block">Přečíst návod →</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLOVNÍČEK POJMŮ -->
-        <section id="slovnicek" class="space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h2 class="text-2xl font-black text-slate-900">Slovníček pojmů „po lopatě“</h2>
-                    <p class="text-slate-600 text-sm">Nerozumíte nějakému slovu? Vyhledejte si ho zde.</p>
-                </div>
-                <input type="text" id="glossary-search" placeholder="Hledat pojem (např. Wi-Fi, myš)..." onkeyup="filterGlossary()" class="px-4 py-2.5 rounded-xl border border-slate-300 w-full md:w-72 focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white">
-            </div>
-
-            <div id="glossary-list" class="grid md:grid-cols-2 gap-4">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                    <h3 class="font-bold text-blue-900 text-lg">Wi-Fi (Vífaj)</h3>
-                    <p class="text-sm text-slate-700">Bezdrátový způsob, jakým se váš telefon nebo počítač připojuje k internetu vzduchem, aniž byste museli zapojovat kabely.</p>
-                </div>
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                    <h3 class="font-bold text-blue-900 text-lg">Prohlížeč (Browser)</h3>
-                    <p class="text-sm text-slate-700">Program v počítači nebo v telefonu (např. Google Chrome, Edge), který slouží k prohlížení stránek na internetu.</p>
-                </div>
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                    <h3 class="font-bold text-blue-900 text-lg">Aplikace (Appka)</h3>
-                    <p class="text-sm text-slate-700">Malý program v chytrém telefonu, který plní určitý úkol – například WhatsApp na volání nebo Fotoaparát.</p>
-                </div>
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                    <h3 class="font-bold text-blue-900 text-lg">Kliknutí / Klepnutí</h3>
-                    <p class="text-sm text-slate-700">Rychlé stisknutí levého tlačítka myši (na počítači) nebo ťuknutí prstem na obrazovku (na telefonu).</p>
-                </div>
-            </div>
-        </section>
-
+    <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+    <main id="appContent" class="flex-grow">
+        <!-- Content injected dynamically via JavaScript -->
     </main>
 
-    <!-- MODÁLNÍ OKNO PRO VÝUKOVÝ OBSAH -->
-    <div id="lesson-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6 shadow-2xl relative border border-slate-200">
-            <button onclick="closeLesson()" class="absolute top-6 right-6 bg-slate-100 hover:bg-slate-200 text-slate-700 w-10 h-10 rounded-full font-bold flex items-center justify-center text-xl transition">✕</button>
-            
-            <div id="modal-content" class="space-y-4">
-                <!-- Sem se načte lekce -->
-            </div>
-
-            <!-- TLAČÍTKO "VYSVĚTLI MI TO JEŠTĚ JEDNODUŠEJI" -->
-            <div class="bg-cyan-50 border border-cyan-200 p-4 rounded-2xl space-y-3">
-                <button onclick="toggleSimplerExplanation()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3.5 px-4 rounded-xl shadow transition flex items-center justify-center gap-2 text-base">
-                    <span>💡 Vysvětli mi to ještě jednodušeji</span>
-                </button>
-                <div id="simpler-explanation-box" class="hidden bg-white p-4 rounded-xl border border-cyan-300 text-sm text-slate-700 space-y-2">
-                    <h4 class="font-bold text-cyan-900">Zjednodušený výklad pro úplné začátečníky:</h4>
-                    <p id="simpler-text"></p>
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark border-t gold-border pt-12 pb-8 mt-20 text-zinc-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-anthracite border gold-border flex items-center justify-center text-brand-gold">
+                        <i class="fa-solid fa-star text-sm"></i>
+                    </div>
+                    <span class="text-xl font-serif font-bold tracking-wider gold-gradient-text">TOP CELEBRITY</span>
                 </div>
+                <p class="text-xs text-zinc-400 leading-relaxed">
+                    Luxusní český magazín přinášející exkluzivní životopisy, zajímavosti a bohaté fotogalerie ze světa domácích i zahraničních celebrit.
+                </p>
             </div>
-
-            <div class="flex justify-end pt-4 border-t border-slate-100">
-                <button onclick="closeLesson()" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 transition">Zavřít lekci</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MOBILNÍ DOLNÍ NAVIGAČNÍ LIŠTA (Sticky Footer Nav jako v ukázkách) -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-brand-dark/95 backdrop-blur border-t border-slate-800 text-white flex justify-around items-center py-2 z-40 text-xs">
-        <a href="#uvod" class="flex flex-col items-center gap-1 text-cyan-400 p-1">
-            <span class="text-lg">🏠</span>
-            <span>Úvod</span>
-        </a>
-        <a href="#kurz" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white p-1">
-            <span class="text-lg">📚</span>
-            <span>Kurz</span>
-        </a>
-        <a href="#mobil" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white p-1">
-            <span class="text-lg">📱</span>
-            <span>Telefon</span>
-        </a>
-        <a href="#slovnicek" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white p-1">
-            <span class="text-lg">📖</span>
-            <span>Slovníček</span>
-        </a>
-    </div>
-
-    <!-- PATIČKA -->
-    <footer id="kontakt" class="bg-brand-dark text-white py-12 mb-12 md:mb-0 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
-            <div class="space-y-3">
-                <h3 class="text-lg font-bold text-cyan-400">PC pro seniory</h3>
-                <p class="text-sm text-slate-400">Trpělivá škola moderních technologií. Vše vysvětlujeme klidně, srozumitelně a s úsměvem.</p>
-            </div>
-            <div class="space-y-3">
-                <h3 class="text-lg font-bold text-white">Rychlé odkazy</h3>
-                <ul class="text-sm text-slate-400 space-y-1">
-                    <li><a href="#uvod" class="hover:text-white">Úvodní stránka</a></li>
-                    <li><a href="#kurz" class="hover:text-white">Seznam kapitol</a></li>
-                    <li><a href="#slovnicek" class="hover:text-white">Slovníček pojmů</a></li>
-                    <li><a href="admin.html" class="text-cyan-400 hover:underline">PWA Administrace pro správu webu</a></li>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Kategorie osobností</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="router('zeny-zahranici')" class="hover:text-brand-gold transition-colors">Ženy – zahraničí</button></li>
+                    <li><button onclick="router('zeny-cr')" class="hover:text-brand-gold transition-colors">Ženy – ČR</button></li>
+                    <li><button onclick="router('zeny-sr')" class="hover:text-brand-gold transition-colors">Ženy – SR</button></li>
+                    <li><button onclick="router('muzi-zahranici')" class="hover:text-brand-gold transition-colors">Muži – zahraničí</button></li>
+                    <li><button onclick="router('muzi-cr')" class="hover:text-brand-gold transition-colors">Muži – ČR</button></li>
                 </ul>
             </div>
-            <div class="space-y-3">
-                <h3 class="text-lg font-bold text-white">Kontakt & Podpora</h3>
-                <p class="text-sm text-slate-400">Máte dotaz ke kurzu nebo potřebujete poradit?</p>
-                <p class="text-cyan-300 font-bold">E-mail: podpora@pcproseniory.cz</p>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Rychlé odkazy</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="router('fotogalerie')" class="hover:text-brand-gold transition-colors">Velká fotogalerie</button></li>
+                    <li><button onclick="router('kniha-navstev')" class="hover:text-brand-gold transition-colors">Kniha návštěv</button></li>
+                    <li><button onclick="router('odkazy')" class="hover:text-brand-gold transition-colors">Partnerské odkazy</button></li>
+                    <li><button onclick="toggleSearchModal()" class="hover:text-brand-gold transition-colors">Vyhledávání v článcích</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-brand-gold font-serif font-semibold text-base mb-4 uppercase tracking-wider">Redakce & Kontakt</h4>
+                <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Máte tip na zajímavou osobnost nebo připomínku k obsahu? Neváhejte nás kontaktovat.</p>
+                <div class="flex items-center gap-3 text-brand-gold">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span class="text-xs">redakce@topcelebrity.cz</span>
+                </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 pt-8 mt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-            © 2026 PC pro seniory. Všechna práva vyhrazena. Vytvořeno pro radost a pomoc všem generacím.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-4">
+            <p>&copy; 2026 TOP CELEBRITY. Všechna práva vyhrazena. Původní web modernizován pro maximální zážitek.</p>
+            <!-- HIDDEN PWA ADMIN TRIGGER (Security Shield in Footer) -->
+            <button onclick="openAdminLogin()" class="flex items-center gap-2 text-zinc-600 hover:text-brand-gold transition-colors p-2 rounded" title="Správa webu (Admin PWA)">
+                <i class="fa-solid fa-shield-halved text-sm"></i>
+                <span class="text-[10px] tracking-wider uppercase">PWA Administrace</span>
+            </button>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-start justify-center pt-20 px-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-2xl rounded-xl p-6 shadow-2xl relative animate-fadeIn">
+            <button onclick="toggleSearchModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold text-lg w-8 h-8 flex items-center justify-center rounded-full bg-brand-anthracite">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-serif font-bold text-brand-gold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass"></i> Vyhledávání osobností
+            </h3>
+            <div class="relative mb-6">
+                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Zadejte jméno osobnosti, klíčové slovo..." class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-3 pl-10 text-cream placeholder-zinc-500 focus:outline-none focus:border-brand-gold">
+                <i class="fa-solid fa-search absolute left-3.5 top-4 text-zinc-500"></i>
+            </div>
+            <div id="searchResults" class="max-h-96 overflow-y-auto space-y-3">
+                <p class="text-zinc-500 text-sm text-center py-8">Začněte psát pro vyhledávání v profilech...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button onclick="prevLightboxImage()" class="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="nextLightboxImage()" class="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-brand-gold text-2xl w-12 h-12 flex items-center justify-center rounded-full bg-brand-anthracite/80 z-10">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="max-w-5xl max-h-[85vh] flex flex-col items-center">
+            <img id="lightboxImg" src="" alt="Detail fotografie" class="max-h-[75vh] max-w-full object-contain rounded-lg border gold-border shadow-2xl">
+            <p id="lightboxCaption" class="mt-4 text-brand-gold font-serif text-lg text-center"></p>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-md rounded-xl p-6 shadow-2xl relative">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-serif font-bold text-brand-gold mb-2">PWA Administrace</h3>
+            <p class="text-xs text-zinc-400 mb-6">Zadejte bezpečnostní PIN pro přístup do redakčního systému (výchozí: 2026).</p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">PIN Kód</label>
+                    <input type="password" id="adminPinInput" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="Zadejte PIN">
+                </div>
+                <button onclick="verifyAdminPin()" class="w-full gold-btn py-2.5 rounded-lg text-sm uppercase tracking-wider">Přihlásit se do administrace</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PWA ADMIN DASHBOARD MODAL -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 bg-brand-black hidden flex flex-col overflow-hidden">
+        <!-- Admin Header -->
+        <div class="bg-brand-dark border-b gold-border px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-brand-burgundy border gold-border flex items-center justify-center text-brand-gold">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-serif font-bold text-brand-gold">TOP CELEBRITY – PWA Administrace</h2>
+                    <p class="text-xs text-zinc-400">Správa profilů, článků, fotografií a odkazů</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="exportDataJSON()" class="bg-brand-anthracite border gold-border px-4 py-2 rounded-lg text-xs font-semibold text-brand-gold hover:bg-brand-gold hover:text-black transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Export dat
+                </button>
+                <button onclick="closeAdminDashboard()" class="bg-brand-burgundy text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-brand-burgundy-light transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Odhlásit / Zavřít
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Content Area -->
+        <div class="flex-grow flex overflow-hidden">
+            <!-- Sidebar Tabs -->
+            <div class="w-64 bg-brand-dark border-r gold-border p-4 space-y-2 hidden md:block">
+                <button onclick="switchAdminTab('profiles')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="profiles">
+                    <i class="fa-solid fa-users w-5"></i> Profily osobností
+                </button>
+                <button onclick="switchAdminTab('articles')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="articles">
+                    <i class="fa-solid fa-newspaper w-5"></i> Články & Zajímavosti
+                </button>
+                <button onclick="switchAdminTab('gallery')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="gallery">
+                    <i class="fa-solid fa-images w-5"></i> Fotogalerie
+                </button>
+                <button onclick="switchAdminTab('guestbook')" class="admin-tab w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-zinc-300 hover:bg-brand-anthracite hover:text-brand-gold transition-colors flex items-center gap-3 data-[active=true]:bg-brand-anthracite data-[active=true]:text-brand-gold data-[active=true]:border-l-4 data-[active=true]:border-brand-gold" data-tab="guestbook">
+                    <i class="fa-solid fa-book-open w-5"></i> Kniha návštěv
+                </button>
+            </div>
+
+            <!-- Main Tab Panel Content -->
+            <div class="flex-grow overflow-y-auto p-6 md:p-8 bg-brand-black">
+                <!-- PROFILES TAB -->
+                <div id="adminTabProfiles" class="admin-tab-content space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa profilů osobností</h3>
+                        <button onclick="openProfileModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat nový profil
+                        </button>
+                    </div>
+                    <div id="adminProfilesTable" class="bg-brand-dark border gold-border rounded-xl overflow-hidden">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- ARTICLES TAB -->
+                <div id="adminTabArticles" class="admin-tab-content space-y-6 hidden">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa článků a zajímavostí</h3>
+                        <button onclick="openArticleModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat nový článek
+                        </button>
+                    </div>
+                    <div id="adminArticlesTable" class="bg-brand-dark border gold-border rounded-xl overflow-hidden">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- GALLERY TAB -->
+                <div id="adminTabGallery" class="admin-tab-content space-y-6 hidden">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-serif font-bold text-brand-gold">Správa fotogalerie</h3>
+                        <button onclick="openGalleryItemModal()" class="gold-btn px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Přidat fotografii
+                        </button>
+                    </div>
+                    <div id="adminGalleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- GUESTBOOK TAB -->
+                <div id="adminTabGuestbook" class="admin-tab-content space-y-6 hidden">
+                    <h3 class="text-2xl font-serif font-bold text-brand-gold">Moderování knihy návštěv</h3>
+                    <div id="adminGuestbookList" class="space-y-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE EDIT/CREATE MODAL -->
+    <div id="profileModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-brand-dark border gold-border w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl p-6 shadow-2xl relative">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-brand-gold"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="profileModalTitle" class="text-xl font-serif font-bold text-brand-gold mb-6">Přidat / Upravit profil</h3>
+            <form id="profileForm" onsubmit="saveProfile(event)" class="space-y-4">
+                <input type="hidden" id="profileId">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Jméno osobnosti</label>
+                        <input type="text" id="pName" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Kategorie</label>
+                        <select id="pCategory" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold">
+                            <option value="zeny-zahranici">Ženy – zahraničí</option>
+                            <option value="zeny-cr">Ženy – ČR</option>
+                            <option value="zeny-sr">Ženy – SR</option>
+                            <option value="muzi-zahranici">Muži – zahraničí</option>
+                            <option value="muzi-cr">Muži – ČR</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">URL hlavní fotografie</label>
+                    <input type="url" id="pImage" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="https://...">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Povolání / Role</label>
+                        <input type="text" id="pProfession" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. Herečka a modelka">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Datum narození / Věk</label>
+                        <input type="text" id="pBirth" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. 15. června 1990">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Životopis</label>
+                    <textarea id="pBio" rows="5" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">URL adresy fotek do galerie (oddělené čárkou)</label>
+                    <textarea id="pGallery" rows="2" class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="url1, url2, url3..."></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeProfileModal()" class="bg-brand-anthracite px-4 py-2 rounded-lg text-sm text-zinc-300 hover:text-white">Zrušit</button>
+                    <button type="submit" class="gold-btn px-6 py-2 rounded-lg text-sm">Uložit profil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION CORE -->
     <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        let currentScale = 1;
-        function changeFontSize(direction) {
-            currentScale += direction * 0.1;
-            if (currentScale < 0.95) currentScale = 0.95;
-            if (currentScale > 1.35) currentScale = 1.35;
-            document.body.style.fontSize = currentScale + 'rem';
-        }
-
-        function toggleContrast() {
-            document.body.classList.toggle('high-contrast');
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
-        function filterGlossary() {
-            const input = document.getElementById('glossary-search').value.toLowerCase();
-            const list = document.getElementById('glossary-list').children;
-            for (let item of list) {
-                const text = item.innerText.toLowerCase();
-                item.style.display = text.includes(input) ? 'block' : 'none';
+        /* DEFAULT MOCK & PERSISTENT DATA */
+        const defaultProfiles = [
+            {
+                id: '1',
+                name: 'Scarlett Johansson',
+                category: 'zeny-zahranici',
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herečka a producentka',
+                birth: '22. listopadu 1984',
+                bio: 'Scarlett Johansson je americká herečka a zpěvačka, jedna z nejlépe placených herců na světě. Proslavila se rolemi ve filmech jako Ztraceno v překladu, Manželská historie či jako Black Widow v univerzu Marvel Cinematic Universe.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '2',
+                name: 'Aňa Geislerová',
+                category: 'zeny-cr',
+                image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herečka a spisovatelka',
+                birth: '17. dubna 1976',
+                bio: 'Anna Geislerová je držitelka několika českých lví za nejlepší ženský herecký výkon v hlavní i vedlejší roli. Patří k nejvýraznějším osobnostem českého filmového plátna posledních tří desetiletí.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '3',
+                name: 'Magdaléna Rybáriková',
+                category: 'zeny-sr',
+                image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Bývalá profesionální tenistka',
+                birth: '4. října 1988',
+                bio: 'Magdaléna Rybáriková je úspěšná slovenská tenistka, semifinalistka Wimbledonu ve dvouhře a vítězka několika turnajů WTA, reprezentantka Slovenska v Fed Cupu.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '4',
+                name: 'Ryan Gosling',
+                category: 'muzi-zahranici',
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herec a hudebník',
+                birth: '12. listopadu 1980',
+                bio: 'Ryan Gosling je kanadský herec známý svými rolemi v nezávislých filmech i velkolepých hollywoodských trhácích jako La La Land, Drive či Barbie.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            {
+                id: '5',
+                name: 'Jiří Mádl',
+                category: 'muzi-cr',
+                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80',
+                profession: 'Herec, scenárista a režisér',
+                birth: '23. října 1986',
+                bio: 'Jiří Mádl se proslavil komediálními rolemi v mládí a postupně se vypracoval v uznávaného režiséra a autora oceňovaných snímků.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80'
+                ]
             }
-        }
+        ];
 
-        const lessonsData = {
-            'kapitola-0': {
-                title: '0. Popis PC a jeho součástí',
-                text: 'Velká bedna (skříň počítače) je mozek celého zařízení. Uvnitř se ukrývají součástky, které zpracovávají vaše pokyny. Zvenku najdete hlavní vypínač, otvory pro USB paměti a připojení pro sluchátka.',
-                simpler: 'Představte si počítačovou skříň jako velkou krabici od bot, ve které bydlí hodný trpaslík. Vy mu přes myš a klávesnici dáváte úkoly a on je okamžitě ukazuje na obrazovce.'
+        const defaultArticles = [
+            {
+                id: '1',
+                title: 'Největší módní trendy na červeném koberci roku 2026',
+                perex: 'Přehled nejodvážnějších a nejelegantnějších modelů, které ovládly letošní filmové festivaly.',
+                date: '10. března 2026',
+                image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+                content: 'Červený koberec letos přinesl neuvěřitelnou kombinaci klasického hollywoodského glamouru a moderních udržitelných materiálů. Přední návrháři sáhli po metalických odlescích a sytých barvách.'
             },
-            'kapitola-1': {
-                title: '1. Základní obsluha počítače',
-                text: 'Pohodlně se usaďte, nastavte si výšku židle tak, abyste měli ruce v rovině stolu. Monitor mějte ve výšce očí. S myší pracujte volně v dlaní, netlačte na ni.',
-                simpler: 'Když sedíte u počítače, seďte rovně jako u stolu při obědě. Myš držte v ruce lehce, jako by to byla malá živá myška, kterou nechcete zmáčknout.'
-            },
-            'kapitola-2': {
-                title: '2. Seznámení s OS Windows',
-                text: 'Operační systém Windows je hlavní prostředí počítače. Na obrazovce (ploše) vidíte malé obrázky neboli ikony. Kliknutím dvakrát za sebou (dvojklikem) program otevřete.',
-                simpler: 'Plocha počítače je jako váš pracovní stůl v obýváku. Ikony na ní jsou jako sešity nebo krabičky, do kterých se podíváte, když na ně dvakrát rychle ťuknete prstem.'
-            },
-            'kapitola-3': {
-                title: '3. Složky a soubory',
-                text: 'Abychom měli ve fotografiích a dopisech pořádek, ukládáme je do složek. Složka funguje úplně stejně jako papírové desky v šanonu.',
-                simpler: 'Složka je jako modrá papírová obálka, do které si schováte všechny fotky z dovolené, abyste je měli pohromadě.'
-            },
-            'kapitola-4': {
-                title: '4. Ukládání dat',
-                text: 'Ukládání dat na počítači znamená jejich bezpečné uložení na pevný disk nebo přenosnou flešku.',
-                simpler: 'Ukládání dat je jako schování napsaného dopisu do šuplíku, abyste ho zítra zase našli.'
-            },
-            'kapitola-5': {
-                title: '5. Psaní textu na PC',
-                text: 'Pro psaní textů používáme textový editor. Klávesnice slouží k psaní písmen, mezerník dělá mezery.',
-                simpler: 'Psaní na počítači je jako psaní na stroji, jen s tou výhodou, že chybu můžete hned smazat.'
-            },
-            'kapitola-6': {
-                title: '6. Tisk',
-                text: 'Tisk dokumentů umožňuje přenést text z monitoru na reálný list papíru pomocí tiskárny.',
-                simpler: 'Tiskárna je váš osobní tiskař, který vám vytiskne to, co máte na obrazovce.'
-            },
-            'kapitola-7': {
-                title: '7. Internet a e-mail',
-                text: 'Internet přináší informace a e-mail slouží k rychlému posílání zpráv přátelům a rodině.',
-                simpler: 'Internet je obrovská knihovna a e-mail je blesková pošta, která dorazí za vteřinu.'
-            },
-            'mobil-zaklady': {
-                title: 'Smartphone: Dotykový displej a ovládání',
-                text: 'Chytrý telefon se ovládá prstem. Ťuknutí odpovídá kliknutí myší. Tažením prstu nahoru či dolů posouváte stránku.',
-                simpler: 'Displej telefonu je jako skleněná tabulka. Stačí jemně pohladit prstem tam, kam chcete vstoupit.'
-            },
-            'mobil-whatsapp': {
-                title: 'WhatsApp a videohovory s vnoučaty',
-                text: 'Aplikace WhatsApp slouží k bezplatnému posílání zpráv a volání přes internet. Stačí v kontaktech vybrat jméno.',
-                simpler: 'WhatsApp je jako bezplatný telefon v kapse, kde se s rodinou můžete i vidět.'
-            },
-            'mobil-pismo': {
-                title: 'Zvětšení písma v telefonu',
-                text: 'V nastavení telefonu si můžete velikost písma zvětšit na maximum, aby se vám všude dobře četlo.',
-                simpler: 'Telefon má v sobě lupu. Stačí v nastavení posunout jezdec a písmena budou obrovská.'
-            },
-            'bezpecnost-sms': {
-                title: 'Jak poznat podvodnou SMS',
-                text: 'Podvodné SMS často vyhrožují zablokováním účtu nebo slibují výhru. Nikdy neklikejte na odkazy!',
-                simpler: 'Když vám přijde zpráva s odkazem na dlužné poplatky, je to vždy podvod. Smažte ji.'
-            },
-            'bezpecnost-hesla': {
-                title: 'Proč a jak používat silná hesla',
-                text: 'Heslo by mělo obsahovat kombinaci písmen a čísel. Nikomu jej nesdělujte.',
-                simpler: 'Heslo je jako klíč od domu. Nedávejte ho cizím lidem.'
-            },
-            'bezpecnost-nakupy': {
-                title: 'Bezpečné nákupy na Internetu',
-                text: 'Nakupujte pouze v ověřených e-shopech s jasnými kontakty a historií.',
-                simpler: 'Internetový obchod je jako obchod na ulici. Pokud nemá adresu ani telefon, nic v něm kupujte.'
+            {
+                id: '2',
+                title: 'Zápisky ze zákulisí natáčení velkofilmu v Praze',
+                perex: 'Jak slavní zahraniční herci objevují kouzlo historické Prahy a české gastronomie.',
+                date: '28. února 2026',
+                image: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80',
+                content: 'Praha nadále zůstává oblíbenou destinací filmových štábů z celého světa. Podrobnosti o pobytu hvězd v centru města.'
             }
+        ];
+
+        const defaultGuestbook = [
+            { id: '1', name: 'Pavel Novák', message: 'Skvělý magazín, moc se mi líbí nový luxusní design a přehledné profily!', date: '12.3.2026' },
+            { id: '2', name: 'Jana Kovářová', message: 'Konečně pořádný web o celebritách na úrovni. Díky za skvělé fotogalerie.', date: '10.3.2026' }
+        ];
+
+        // Load or initialize state from localStorage
+        let state = {
+            profiles: JSON.parse(localStorage.getItem('top_celebrity_profiles')) || defaultProfiles,
+            articles: JSON.parse(localStorage.getItem('top_celebrity_articles')) || defaultArticles,
+            guestbook: JSON.parse(localStorage.getItem('top_celebrity_guestbook')) || defaultGuestbook
         };
 
-        function openLesson(lessonKey) {
-            const data = lessonsData[lessonKey] || { title: 'Lekce', text: 'Obsah lekce se připravuje.', simpler: 'Tohle téma brzy doplníme.' };
-            const modalContent = document.getElementById('modal-content');
-            modalContent.innerHTML = `
-                <h3 class="text-2xl font-black text-slate-900">${data.title}</h3>
-                <p class="text-slate-700 leading-relaxed text-lg">${data.text}</p>
+        function saveData() {
+            localStorage.setItem('top_celebrity_profiles', JSON.stringify(state.profiles));
+            localStorage.setItem('top_celebrity_articles', JSON.stringify(state.articles));
+            localStorage.setItem('top_celebrity_guestbook', JSON.stringify(state.guestbook));
+        }
+
+        /* ROUTING ENGINE */
+        let currentRoute = 'uvod';
+        let currentParam = null;
+
+        function router(route, param = null) {
+            currentRoute = route;
+            currentParam = param;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update active nav styles
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if(el.getAttribute('data-target') === route) {
+                    el.setAttribute('data-active', 'true');
+                    el.classList.add('text-brand-gold', 'border-brand-gold');
+                } else {
+                    el.removeAttribute('data-active');
+                    el.classList.remove('text-brand-gold', 'border-brand-gold');
+                }
+            });
+
+            const container = document.getElementById('appContent');
+
+            if (route === 'uvod') {
+                container.innerHTML = renderHomeView();
+            } else if (['zeny-zahranici', 'zeny-cr', 'zeny-sr', 'muzi-zahranici', 'muzi-cr'].includes(route)) {
+                container.innerHTML = renderCategoryView(route);
+            } else if (route === 'detail') {
+                container.innerHTML = renderDetailView(param);
+            } else if (route === 'fotogalerie') {
+                container.innerHTML = renderGalleryView();
+            } else if (route === 'kniha-navstev') {
+                container.innerHTML = renderGuestbookView();
+            } else if (route === 'odkazy') {
+                container.innerHTML = renderLinksView();
+            } else if (route === 'clanek') {
+                container.innerHTML = renderArticleView(param);
+            }
+        }
+
+        /* VIEW RENDERERS */
+        function renderHomeView() {
+            const latestProfiles = state.profiles.slice(-4).reverse();
+            return `
+                <!-- HERO BANNER -->
+                <section class="relative bg-brand-dark border-b gold-border overflow-hidden py-16 lg:py-24">
+                    <div class="absolute inset-0 z-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1920&q=80')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent z-10"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-anthracite border gold-border text-brand-gold text-xs tracking-wider uppercase">
+                                <i class="fa-solid fa-crown"></i> Exkluzivní magazín
+                            </div>
+                            <h1 class="text-4xl sm:text-6xl font-serif font-bold text-cream tracking-wide leading-tight">
+                                PŘÍBĚHY <span class="gold-gradient-text">OSOBNOSTÍ</span>
+                            </h1>
+                            <p class="text-zinc-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                                Životopisy, zajímavosti a exkluzivní fotogalerie známých osobností z domova i ze světa v moderním luxusním provedení.
+                            </p>
+                            <div class="flex flex-wrap gap-4 pt-2">
+                                <button onclick="router('zeny-zahranici')" class="gold-btn px-8 py-3 rounded-lg text-sm uppercase tracking-wider">Prozkoumat profily</button>
+                                <button onclick="router('fotogalerie')" class="bg-brand-anthracite border gold-border text-brand-gold px-8 py-3 rounded-lg text-sm uppercase tracking-wider hover:bg-brand-gold hover:text-black transition-all">Fotogalerie</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CATEGORIES GRID -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <h2 class="text-3xl font-serif font-bold text-cream mb-8 border-l-4 border-brand-gold pl-4">Kategorie osobností</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                        ${renderCategoryCard('Ženy – zahraničí', 'zeny-zahranici', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Ženy – ČR', 'zeny-cr', 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Ženy – SR', 'zeny-sr', 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Muži – zahraničí', 'muzi-zahranici', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80')}
+                        ${renderCategoryCard('Muži – ČR', 'muzi-cr', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80')}
+                    </div>
+                </section>
+
+                <!-- LATEST PROFILES -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-3xl font-serif font-bold text-cream border-l-4 border-brand-gold pl-4">Nejnovější profily</h2>
+                        <button onclick="router('zeny-zahranici')" class="text-brand-gold text-sm hover:underline flex items-center gap-2">Zobrazit všechny <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${latestProfiles.map(p => renderProfileCard(p)).join('')}
+                    </div>
+                </section>
+
+                <!-- ARTICLES & NEWS -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <h2 class="text-3xl font-serif font-bold text-cream mb-8 border-l-4 border-brand-gold pl-4">Zajímavosti a články</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        ${state.articles.map(art => `
+                            <div onclick="router('clanek', '${art.id}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all">
+                                <div class="h-64 overflow-hidden relative">
+                                    <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <span class="absolute top-4 left-4 bg-brand-black/80 backdrop-blur-sm text-brand-gold text-xs px-3 py-1 rounded-full border gold-border">${art.date}</span>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <h3 class="text-xl font-serif font-bold text-cream group-hover:text-brand-gold transition-colors">${art.title}</h3>
+                                    <p class="text-sm text-zinc-400 line-clamp-2">${art.perex}</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-gold text-xs font-semibold pt-2">Číst celý článek <i class="fa-solid fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
             `;
-            document.getElementById('simpler-text').innerText = data.simpler;
-            document.getElementById('simpler-explanation-box').classList.add('hidden');
-            document.getElementById('lesson-modal').classList.remove('hidden');
         }
 
-        function closeLesson() {
-            document.getElementById('lesson-modal').classList.add('hidden');
+        function renderCategoryCard(title, routeName, imgUrl) {
+            return `
+                <div onclick="router('${routeName}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all p-4 text-center flex flex-col items-center justify-between min-h-[180px]">
+                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 gold-border mb-3 group-hover:scale-105 transition-transform">
+                        <img src="${imgUrl}" alt="${title}" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-cream font-serif font-bold text-sm sm:text-base group-hover:text-brand-gold transition-colors">${title}</h3>
+                    <span class="text-[10px] text-brand-gold uppercase tracking-wider mt-1">Zobrazit sekci <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            `;
         }
 
-        function toggleSimplerExplanation() {
-            const box = document.getElementById('simpler-explanation-box');
-            box.classList.toggle('hidden');
+        function renderProfileCard(p) {
+            return `
+                <div onclick="router('detail', '${p.id}')" class="burgundy-card rounded-xl overflow-hidden group cursor-pointer hover:border-brand-gold transition-all flex flex-col justify-between">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-3 left-3 bg-brand-black/80 backdrop-blur-sm text-brand-gold text-xs px-3 py-1 rounded-full border gold-border flex items-center gap-1.5">
+                            <i class="fa-solid fa-camera"></i> ${p.gallery ? p.gallery.length : 1} fotografií
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] uppercase tracking-widest text-brand-gold font-semibold">${p.profession || 'Osobnost'}</span>
+                        <h3 class="text-xl font-serif font-bold text-cream group-hover:text-brand-gold transition-colors">${p.name}</h3>
+                        <div class="pt-2 flex items-center justify-between text-xs text-brand-gold font-semibold">
+                            <span>Profil osobnosti</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
+
+        function renderCategoryView(categoryCode) {
+            const categoryTitles = {
+                'zeny-zahranici': 'Ženy – zahraničí',
+                'zeny-cr': 'Ženy – ČR',
+                'zeny-sr': 'Ženy – SR',
+                'muzi-zahranici': 'Muži – zahraničí',
+                'muzi-cr': 'Muži – ČR'
+            };
+            const profiles = state.profiles.filter(p => p.category === categoryCode);
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Kategorie</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">${categoryTitles[categoryCode]}</h1>
+                    </div>
+                    ${profiles.length === 0 ? `
+                        <div class="text-center py-20 bg-brand-dark rounded-xl border gold-border">
+                            <i class="fa-solid fa-face-smile text-4xl text-brand-gold mb-4"></i>
+                            <p class="text-zinc-400">V této kategorii zatím nejsou žádné profily. Přidejte je v administraci.</p>
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${profiles.map(p => renderProfileCard(p)).join('')}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function renderDetailView(id) {
+            const p = state.profiles.find(item => item.id === id);
+            if (!p) return `<div class="max-w-7xl mx-auto px-4 py-20 text-center"><h2 class="text-2xl text-red-400">Profil nenalezen</h2><button onclick="router('uvod')" class="mt-4 gold-btn px-6 py-2 rounded-lg">Zpět na úvod</button></div>`;
+            
+            const gallery = p.gallery && p.gallery.length > 0 ? p.gallery : [p.image];
+
+            return `
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                    <!-- Back Button -->
+                    <button onclick="window.history.back()" class="inline-flex items-center gap-2 text-xs text-brand-gold uppercase tracking-wider hover:underline">
+                        <i class="fa-solid fa-arrow-left"></i> Zpět na přehled
+                    </button>
+
+                    <!-- Profile Header -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                        <div class="rounded-xl overflow-hidden border-2 gold-border shadow-2xl">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="md:col-span-2 space-y-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">${p.profession || 'Osobnost'}</span>
+                                <h1 class="text-4xl sm:text-5xl font-serif font-bold text-cream mt-1">${p.name}</h1>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 bg-brand-dark p-4 rounded-xl border gold-border text-sm">
+                                <div>
+                                    <span class="block text-xs text-zinc-500 uppercase">Narození / Věk</span>
+                                    <span class="font-semibold text-cream">${p.birth || 'Neuvedeno'}</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-zinc-500 uppercase">Profese</span>
+                                    <span class="font-semibold text-cream">${p.profession || 'Osobnost'}</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="text-xl font-serif font-bold text-brand-gold">Životopis</h3>
+                                <p class="text-zinc-300 leading-relaxed text-base font-light">${p.bio}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Gallery Section -->
+                    <div class="space-y-6 pt-8 border-t border-zinc-800">
+                        <h3 class="text-2xl font-serif font-bold text-cream flex items-center gap-2">
+                            <i class="fa-solid fa-images text-brand-gold"></i> Fotogalerie osobnosti
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            ${gallery.map((img, idx) => `
+                                <div onclick="openLightbox('${img}', '${p.name} - foto ${idx+1}')" class="h-48 rounded-xl overflow-hidden border gold-border group cursor-pointer relative">
+                                    <img src="${img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-brand-gold text-xl">
+                                        <i class="fa-solid fa-expand"></i>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGalleryView() {
+            // Collect all photos from profiles
+            let allPhotos = [];
+            state.profiles.forEach(p => {
+                if (p.gallery) {
+                    p.gallery.forEach(img => allPhotos.push({ url: img, name: p.name }));
+                } else if (p.image) {
+                    allPhotos.push({ url: p.image, name: p.name });
+                }
+            });
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Fotogalerie</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Kompletní galerie snímků</h1>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        ${allPhotos.map((photo, idx) => `
+                            <div onclick="openLightbox('${photo.url}', '${photo.name}')" class="h-64 rounded-xl overflow-hidden border gold-border group cursor-pointer relative shadow-lg">
+                                <img src="${photo.url}" alt="${photo.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent opacity-80"></div>
+                                <div class="absolute bottom-3 left-3 right-3">
+                                    <span class="text-xs font-serif font-bold text-brand-gold block truncate">${photo.name}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGuestbookView() {
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Návštěvní kniha</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Vzkazy od čtenářů</h1>
+                    </div>
+                    
+                    <!-- Add Message Form -->
+                    <div class="burgundy-card rounded-xl p-6 sm:p-8 space-y-6">
+                        <h3 class="text-xl font-serif font-bold text-brand-gold">Zanechte nám vzkaz</h3>
+                        <form onsubmit="submitGuestbook(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Vaše jméno</label>
+                                <input type="text" id="gbName" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="např. Jan Novák">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-1">Váš vzkaz</label>
+                                <textarea id="gbMessage" rows="4" required class="w-full bg-brand-anthracite border gold-border rounded-lg px-4 py-2 text-cream focus:outline-none focus:border-brand-gold" placeholder="Napište svůj názor..."></textarea>
+                            </div>
+                            <button type="submit" class="gold-btn px-8 py-3 rounded-lg text-sm uppercase tracking-wider">Odeslat vzkaz</button>
+                        </form>
+                    </div>
+
+                    <!-- Messages List -->
+                    <div class="space-y-4">
+                        ${state.guestbook.map(gb => `
+                            <div class="bg-brand-dark border gold-border rounded-xl p-6 space-y-2">
+                                <div class="flex items-center justify-between text-xs text-brand-gold">
+                                    <span class="font-bold text-base font-serif text-cream">${gb.name}</span>
+                                    <span>${gb.date}</span>
+                                </div>
+                                <p class="text-zinc-300 text-sm leading-relaxed">${gb.message}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLinksView() {
+            const links = [
+                { title: 'Oficiální portál Českého filmu', url: 'https://www.csfd.cz', desc: 'Největší filmová databáze a recenze.' },
+                { title: 'Světové celebrity magazín', url: 'https://www.vogue.com', desc: 'Módní a společenský magazín světového formátu.' },
+                { title: 'Kultura a umění ČR', url: 'https://www.mkcr.cz', desc: 'Ministerstvo kultury České republiky.' }
+            ];
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">Odkazy</span>
+                        <h1 class="text-4xl font-serif font-bold text-cream mt-1">Doporučené partnerské weby</h1>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${links.map(l => `
+                            <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="burgundy-card rounded-xl p-6 group hover:border-brand-gold transition-all block space-y-2">
+                                <h3 class="text-lg font-serif font-bold text-cream group-hover:text-brand-gold transition-colors flex items-center justify-between">
+                                    ${l.title} <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </h3>
+                                <p class="text-xs text-zinc-400">${l.desc}</p>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderArticleView(id) {
+            const art = state.articles.find(a => a.id === id);
+            if (!art) return `<div class="max-w-7xl mx-auto px-4 py-20 text-center"><h2 class="text-2xl text-red-400">Článek nenalezen</h2><button onclick="router('uvod')" class="mt-4 gold-btn px-6 py-2 rounded-lg">Zpět na úvod</button></div>`;
+
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+                    <button onclick="router('uvod')" class="inline-flex items-center gap-2 text-xs text-brand-gold uppercase tracking-wider hover:underline">
+                        <i class="fa-solid fa-arrow-left"></i> Zpět na úvod
+                    </button>
+                    <div class="space-y-4">
+                        <span class="text-xs uppercase tracking-widest text-brand-gold font-semibold">${art.date}</span>
+                        <h1 class="text-4xl sm:text-5xl font-serif font-bold text-cream leading-tight">${art.title}</h1>
+                    </div>
+                    <div class="rounded-xl overflow-hidden border gold-grade max-h-[500px]">
+                        <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-zinc-300 leading-relaxed text-lg font-light space-y-6">
+                        <p class="font-semibold text-brand-gold text-xl">${art.perex}</p>
+                        <p>${art.content}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* LIGHTBOX FUNCTIONS */
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
+
+        function openLightbox(imgUrl, caption) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const cap = document.getElementById('lightboxCaption');
+            img.src = imgUrl;
+            cap.innerText = caption;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        function prevLightboxImage() {}
+        function nextLightboxImage() {}
+
+        /* SEARCH MODAL */
+        function toggleSearchModal() {
+            const m = document.getElementById('searchModal');
+            m.classList.toggle('hidden');
+            if(!m.classList.contains('hidden')) {
+                document.getElementById('searchInput').focus();
+            }
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if(!query || query.trim() === '') {
+                resultsContainer.innerHTML = '<p class="text-zinc-500 text-sm text-center py-8">Začněte psát pro vyhledávání v profilech...</p>';
+                return;
+            }
+            const q = query.toLowerCase();
+            const matched = state.profiles.filter(p => p.name.toLowerCase().includes(q) || (p.profession && p.profession.toLowerCase().includes(q)));
+
+            if(matched.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-zinc-400 text-sm text-center py-8">Žádné osobnosti neodpovídají zadanému výrazu.</p>';
+                return;
+            }
+
+            resultsContainer.innerHTML = matched.map(p => `
+                <div onclick="toggleSearchModal(); router('detail', '${p.id}')" class="flex items-center gap-4 p-3 rounded-lg bg-brand-anthracite hover:bg-brand-burgundy transition-colors cursor-pointer border gold-border">
+                    <img src="${p.image}" class="w-12 h-12 rounded-full object-cover">
+                    <div>
+                        <h4 class="text-cream font-serif font-bold text-base">${p.name}</h4>
+                        <span class="text-xs text-brand-gold">${p.profession || 'Osobnost'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* MOBILE MENU */
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        /* GUESTBOOK SUBMISSION */
+        function submitGuestbook(e) {
+            e.preventDefault();
+            const name = document.getElementById('gbName').value;
+            const message = document.getElementById('gbMessage').value;
+            const newEntry = {
+                id: Date.now().toString(),
+                name: name,
+                message: message,
+                date: new Date().toLocaleDateString('cs-CZ')
+            };
+            state.guestbook.unshift(newEntry);
+            saveData();
+            router('kniha-navstev');
+            alert('Vzkaz byl úspěšně přidán do knihy návštěv.');
+        }
+
+        /* ADMIN PWA SYSTEM & AUTH */
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+        function verifyAdminPin() {
+            const pin = document.getElementById('adminPinInput').value;
+            if(pin === '2026') {
+                closeAdminLogin();
+                document.getElementById('adminDashboardModal').classList.remove('hidden');
+                renderAdminProfiles();
+                renderAdminArticles();
+                renderAdminGallery();
+                renderAdminGuestbook();
+            } else {
+                alert('Nesprávný PIN kód!');
+            }
+        }
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab').forEach(el => el.removeAttribute('data-active'));
+            
+            document.getElementById('adminTab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.remove('hidden');
+            document.querySelector(`[data-tab="${tabName}"]`).setAttribute('data-active', 'true');
+        }
+
+        /* ADMIN PROFILES MANAGEMENT */
+        function renderAdminProfiles() {
+            const table = document.getElementById('adminProfilesTable');
+            table.innerHTML = `
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b gold-border text-brand-gold text-xs uppercase bg-brand-anthracite">
+                            <th class="p-4">Fotografie</th>
+                            <th class="p-4">Jméno</th>
+                            <th class="p-4">Kategorie</th>
+                            <th class="p-4">Profese</th>
+                            <th class="p-4 text-right">Akce</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-800">
+                        ${state.profiles.map(p => `
+                            <tr class="hover:bg-brand-anthracite/50">
+                                <td class="p-4"><img src="${p.image}" class="w-10 h-10 rounded-full object-cover"></td>
+                                <td class="p-4 font-semibold text-cream">${p.name}</td>
+                                <td class="p-4 text-xs text-brand-gold">${p.category}</td>
+                                <td class="p-4 text-xs text-zinc-400">${p.profession || '-'}</td>
+                                <td class="p-4 text-right space-x-2">
+                                    <button onclick="editProfile('${p.id}')" class="text-brand-gold hover:underline"><i class="fa-solid fa-pen"></i></button>
+                                    <button onclick="deleteProfile('${p.id}')" class="text-red-400 hover:underline"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function openProfileModal(id = null) {
+            document.getElementById('profileModal').classList.remove('hidden');
+            if(id) {
+                const p = state.profiles.find(item => item.id === id);
+                document.getElementById('profileModalTitle').innerText = 'Upravit profil osobnosti';
+                document.getElementById('profileId').value = p.id;
+                document.getElementById('pName').value = p.name;
+                document.getElementById('pCategory').value = p.category;
+                document.getElementById('pImage').value = p.image;
+                document.getElementById('pProfession').value = p.profession || '';
+                document.getElementById('pBirth').value = p.birth || '';
+                document.getElementById('pBio').value = p.bio;
+                document.getElementById('pGallery').value = p.gallery ? p.gallery.join(', ') : '';
+            } else {
+                document.getElementById('profileModalTitle').innerText = 'Přidat nový profil';
+                document.getElementById('profileForm').reset();
+                document.getElementById('profileId').value = '';
+            }
+        }
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.add('hidden');
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            const id = document.getElementById('profileId').value;
+            const galleryInput = document.getElementById('pGallery').value;
+            const galleryArr = galleryInput ? galleryInput.split(',').map(s => s.trim()).filter(s => s) : [];
+
+            const profileData = {
+                id: id || Date.now().toString(),
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCategory').value,
+                image: document.getElementById('pImage').value,
+                profession: document.getElementById('pProfession').value,
+                birth: document.getElementById('pBirth').value,
+                bio: document.getElementById('pBio').value,
+                gallery: galleryArr.length > 0 ? galleryArr : [document.getElementById('pImage').value]
+            };
+
+            if(id) {
+                const idx = state.profiles.findIndex(p => p.id === id);
+                state.profiles[idx] = profileData;
+            } else {
+                state.profiles.push(profileData);
+            }
+
+            saveData();
+            closeProfileModal();
+            renderAdminProfiles();
+            router('uvod');
+        }
+
+        function deleteProfile(id) {
+            if(confirm('Opravdu chcete tento profil smazat?')) {
+                state.profiles = state.profiles.filter(p => p.id !== id);
+                saveData();
+                renderAdminProfiles();
+            }
+        }
+
+        function editProfile(id) {
+            openProfileModal(id);
+        }
+
+        /* ADMIN ARTICLES & GALLERY */
+        function renderAdminArticles() {
+            document.getElementById('adminArticlesTable').innerHTML = `
+                <div class="p-6 space-y-4">
+                    ${state.articles.map(art => `
+                        <div class="flex items-center justify-between p-4 bg-brand-anthracite rounded-lg border gold-border">
+                            <div>
+                                <h4 class="font-serif font-bold text-cream">${art.title}</h4>
+                                <span class="text-xs text-brand-gold">${art.date}</span>
+                            </div>
+                            <button onclick="deleteArticle('${art.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        function openArticleModal() {
+            const title = prompt('Zadejte název nového článku:');
+            if(!title) return;
+            const perex = prompt('Zadejte perex článku:');
+            const image = prompt('URL hlavní fotografie článku:');
+            const content = prompt('Celý text článku:');
+            
+            const newArt = {
+                id: Date.now().toString(),
+                title: title,
+                perex: perex || '',
+                date: new Date().toLocaleDateString('cs-CZ'),
+                image: image || 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
+                content: content || ''
+            };
+            state.articles.push(newArt);
+            saveData();
+            renderAdminArticles();
+        }
+        function deleteArticle(id) {
+            state.articles = state.articles.filter(a => a.id !== id);
+            saveData();
+            renderAdminArticles();
+        }
+
+        function renderAdminGallery() {
+            let allPhotos = [];
+            state.profiles.forEach(p => {
+                if(p.gallery) p.gallery.forEach(img => allPhotos.push({ name: p.name, url: img }));
+            });
+            document.getElementById('adminGalleryGrid').innerHTML = allPhotos.map(ph => `
+                <div class="h-32 rounded-lg overflow-hidden border gold-border relative">
+                    <img src="${ph.url}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-black/70 p-1 text-[10px] text-brand-gold text-center truncate">${ph.name}</div>
+                </div>
+            `).join('');
+        }
+        function openGalleryItemModal() {
+            alert('Fotografie do galerie se spravují přímo v jednotlivých profilech osobností.');
+        }
+
+        function renderAdminGuestbook() {
+            document.getElementById('adminGuestbookList').innerHTML = state.guestbook.map(gb => `
+                <div class="p-4 bg-brand-anthracite rounded-lg border gold-border flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-cream">${gb.name} <span class="text-xs text-zinc-500 font-normal">(${gb.date})</span></h4>
+                        <p class="text-xs text-zinc-300 mt-1">${gb.message}</p>
+                    </div>
+                    <button onclick="deleteGuestbook('${gb.id}')" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+        function deleteGuestbook(id) {
+            state.guestbook = state.guestbook.filter(g => g.id !== id);
+            saveData();
+            renderAdminGuestbook();
+        }
+
+        function exportDataJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "top_celebrity_backup.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        /* INITIALIZATION ON PAGE LOAD */
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if URL has #admin hash
+            if(window.location.hash === '#admin') {
+                openAdminLogin();
+            }
+            router('uvod');
+        });
     </script>
 </body>
 </html>
